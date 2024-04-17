@@ -7,6 +7,13 @@ redirect_from:
   - /about.html
 ---
 
+I am a Final Year Masters in Data Science and Computing Student at [Sri Sathya Sai Institute of Higher Learning](https://www.sssihl.edu.in/), Muddenahalli Campus.
+
+**Masters Thesis** : **"Improving Audio Abuse Detection in Indian Languages with Multi-Modal Cross-Lingual Representations"**, supervised by [Dr Sampath Lonka](https://scholar.google.co.in/citations?user=IahaV5wAAAAJ&hl=en). You can find a quick summary [here](https://docs.google.com/document/d/1an_OwC8ZTY9TSN7vUGubfhEd-kDGHIdVd6EBOKXBaGw/edit?usp=sharing).
+
+My research interests align at the intersection of Computational Social Science and Social Biases. I am particularly drawn to areas such as cross-lingual representation learning for under-resourced languages, online toxicity detection and mitigation of inherent biases. Additionally, I have a strong interest in applying my skills to projects addressing ethnic, social and racial bias.
+
+<!-- 
 This is the front page of a website that is powered by the [academicpages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io).
 
 A data-driven personal website
@@ -46,4 +53,4 @@ Example: editing a markdown file for a talk
 
 For more info
 ------
-More info about configuring academicpages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+More info about configuring academicpages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful. -->
