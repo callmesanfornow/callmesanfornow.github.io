@@ -11,18 +11,18 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+<!-- * Ph.D in Version Control Theory, GitHub University, 2018 (expected) -->
+* MSc. in Data Science and Computing, Sri Sathya Sai Institute of Higher Learning, 2024 (Expected)
+* Bachelors in Computer Applications, Sri Sathya Sai Institute of Higher Learning, 2021
 
-Work experience
+<!-- Work experience
 ======
-* Spring 2024: Academic Pages Collaborator
-  * Github University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
+* Jan to March 2024: Bachelors Project Student Supervisor
+  * SSSIHL
+  * Duties includes: Helping in SQL queries and Cloud Deployment -->
+  <!-- * Supervisor: The Users -->
 
-* Fall 2015: Research Assistant
+<!-- * Fall 2015: Research Assistant
   * Github University
   * Duties included: Merging pull requests
   * Supervisor: Professor Hub
@@ -30,16 +30,26 @@ Work experience
 * Summer 2015: Research Assistant
   * Github University
   * Duties included: Tagging issues
-  * Supervisor: Professor Git
+  * Supervisor: Professor Git -->
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Computers Science
+  * Software Engineering
+  * Cloud Computing
+  * Data Structures and Algorithm Analysis
+  * Network Essentials
+  * Operating Systems.
+* Mathematics
+  * Multivariate Statistical Analysis
+  * Inferential Statistics
+  * Linear Algebra
+  * Regression Methods
+* Programming Languages
+  * Python
+  * C/C++
+  * Java
+  * $\latex$
 
 Publications
 ======
@@ -47,18 +57,23 @@ Publications
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Talks
+<!-- Talks
 ======
   <ul>{% for post in site.talks reversed %}
     {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
+  {% endfor %}</ul> -->
   
-Teaching
+<!-- Teaching
 ======
   <ul>{% for post in site.teaching reversed %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+  {% endfor %}</ul> -->
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+* Student Mentor | Undergraduate Project January to March 2024 
+  * Mentoring students with their Bachelor's thesis.
+  * For 2024, the students under supervision are undertaking a project on cloud migration and revamping the legacy software in the accommodation of the Prashanti Nilayam Ashram.
+* Department In-charge | Campus Recording Studio June 2019 – March 2024
+  * Lead a team of newcomers every year, teaching them the basics of sound, audio engineering, and audio mixing software.
+  * Provided audio for SSSMC's YouTube channel for the campus' annual Sports and Cultural Meet.
