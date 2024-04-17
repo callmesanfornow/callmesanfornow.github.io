@@ -58,9 +58,11 @@ Publications
   
 Service and leadership
 ======
-* **Student Mentor** : Undergraduate Project ***January to March 2024*** 
+* **Student Mentor** 
+  * Undergraduate Project ***January to March 2024*** 
   * Mentoring students with their Bachelor's thesis.
   * For 2024, the students under supervision are undertaking a project on cloud migration and revamping the legacy software in the accommodation of the Prashanti Nilayam Ashram.
-* **Department In-charge** : Campus Recording Studio ***June 2019 – March 2024***
+* **Department In-charge** 
+  * Campus Recording Studio ***June 2019 – March 2024***
   * Lead a team of newcomers every year, teaching them the basics of sound, audio engineering, and audio mixing software.
   * Provided audio for SSSMC's YouTube channel for the campus' annual Sports and Cultural Meet.
