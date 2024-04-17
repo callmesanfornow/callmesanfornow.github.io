@@ -28,6 +28,10 @@ Skills
   * C/C++
   * Java
   * Latex
+* **Deep Learning Frameworks**
+  * Scikit-Learn
+  * 🤗 Transformers
+  * PyTorch
 * **Mathematics**
   * Multivariate Statistical Analysis
   * Inferential Statistics
