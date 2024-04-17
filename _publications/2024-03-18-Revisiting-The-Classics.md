@@ -1,7 +1,7 @@
 ---
 title: "Revisiting The Classics: A Study on Identifying and Rectifying Gender Stereotypes in Rhymes and Poems"
 collection: publications
-permalink: /publication/2024-03-18-Revisiting-The-Classics.md
+permalink: /publications/2024-03-18-Revisiting-The-Classics.md
 excerpt: ''
 date: 2024-03-18
 venue: 'LREC-COLING 2024'
