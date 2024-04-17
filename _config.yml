@@ -21,7 +21,7 @@ repository               : "callmesanfornow/callmesanfornow.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile.jpg"
   name             : "Aditya Narayan Sankaran"
   pronouns         : "he/him"  
   bio              : "Final Year MSc Data Science and Computing Student"
