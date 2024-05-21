@@ -12,7 +12,7 @@ redirect_from:
 Education
 ======
 
-* MSc. in Data Science and Computing, Sri Sathya Sai Institute of Higher Learning, 2024 (Expected)
+* MSc. in Data Science and Computing, Sri Sathya Sai Institute of Higher Learning, 2024
 * Bachelors in Computer Applications, Sri Sathya Sai Institute of Higher Learning, 2021
  
 Skills

@@ -11,7 +11,7 @@ locale                   : "en-US"
 title                    : "Aditya Narayan Sankaran"
 title_separator          : "-"
 name                     : &name "Aditya Narayan Sankaran"
-description              : &description "Final Year MSc Data Science and Computing Student"
+description              : &description "Gradute Student in Data Science and Computing"
 url                      : https://callmesanfornow.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "callmesanfornow/callmesanfornow.github.io"
@@ -24,7 +24,7 @@ author:
   avatar           : "profile.jpg"
   name             : "Aditya Narayan Sankaran"
   pronouns         : "he/him"  
-  bio              : "Final Year MSc Data Science and Computing Student"
+  bio              : "Gradute Student in Data Science and Computing"
   location         : "Chennai, India"
   employer         : "Sri Sathya Sai Institute of Higher Learning, Muddenahalli Campus"
   uri              : # URL
@@ -47,7 +47,7 @@ author:
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
   # Social media
-  bluesky          : #"idkwia.bsky.social" # Replace this with you Bluesky username
+  bluesky          : # Replace this with you Bluesky username
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
