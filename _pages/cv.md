@@ -17,17 +17,6 @@ Education
  
 Skills
 ======
-* **Computers Science**
-  * Software Engineering
-  * Cloud Computing
-  * Data Structures and Algorithm Analysis
-  * Network Essentials
-  * Operating Systems.
-* **Programming Languages**
-  * Python
-  * C/C++
-  * Java
-  * Latex
 * **Deep Learning Frameworks**
   * Scikit-Learn
   * 🤗 Transformers
@@ -37,6 +26,17 @@ Skills
   * Inferential Statistics
   * Linear Algebra
   * Regression Methods
+* **Computers Science**
+  * Software Engineering
+  * Cloud Computing
+  * Data Structures and Algorithm Analysis
+  * Network Essentials
+  * Operating Systems
+* **Programming Languages**
+  * Python
+  * C/C++
+  * Java
+  * Latex
 
 Publications
 ======

@@ -11,7 +11,7 @@ locale                   : "en-US"
 title                    : "Aditya Narayan Sankaran"
 title_separator          : "-"
 name                     : &name "Aditya Narayan Sankaran"
-description              : &description "Gradute Student in Data Science and Computing"
+description              : &description ""
 url                      : https://callmesanfornow.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "callmesanfornow/callmesanfornow.github.io"
@@ -26,7 +26,7 @@ author:
   pronouns         : "he/him"  
   bio              : "Gradute Student in Data Science and Computing"
   location         : "Chennai, India"
-  employer         : "Sri Sathya Sai Institute of Higher Learning, Muddenahalli Campus"
+  employer         : ""
   uri              : # URL
   email            : "adityanarayan.san@gmail.com" 
 
