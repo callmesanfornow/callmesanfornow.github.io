@@ -7,8 +7,11 @@ papers:
     selected: n
 
   - title: "Revisiting the Classics: A Study on Identifying and Rectifying Gender Stereotypes in Rhymes and Poems"
-    authors: "Aditya Narayan Sankaran</b><sup>‡</sup>, Vigneshwaran Shankaran<sup>‡</sup>, Sampath Lonka, Rajesh Sharma"
+    authors: "<b>Aditya Narayan Sankaran</b><sup>‡</sup>, Vigneshwaran Shankaran<sup>‡</sup>, Sampath Lonka, Rajesh Sharma"
     venue: "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)"
     paper_pdf: "https://aclanthology.org/2024.lrec-main.1228.pdf"
-    code: "https://github.com/s-vigneshwaran/Revisiting-The-Classics"
+    data: "https://github.com/s-vigneshwaran/Revisiting-The-Classics"
+    poster: https://drive.google.com/file/d/1BfzhxnF7VsEpZRnwZE8zufh0iaoQxUZ_/view?usp=sharing
+    slides: https://drive.google.com/file/d/1J6CkOqg7e5FiZBrTOlf79PGoR3h0tm-C/view?usp=sharing
+    video: https://drive.google.com/file/d/1HIYueebq96sO35ZXthUzWaAeZwwTivwY/view?usp=sharing
     selected: y
