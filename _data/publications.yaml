@@ -1,7 +1,7 @@
 papers:
-  - title: "Title Redacted due to anonimity period"
+  - title: "Towards Cross-Lingual Audio Abuse Detection in Low-Resource Setting with Few-Shot Learning"
     authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbaksh, Noel Crespi"
-    venue: "COLING 2025"
+    venue: "The 31st International Conference on Computational Linguistics (COLING 2025)"
     paper_pdf: ""
     code: ""
     selected: n
