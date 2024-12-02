@@ -3,8 +3,8 @@ papers:
     authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbaksh, Noel Crespi"
     venue: "The 31st International Conference on Computational Linguistics (COLING 2025)"
     paper_pdf: ""
-    code: ""
-    selected: n
+    code: "https://github.com/callmesanfornow/fsl-audio-abuse.git"
+    selected: y
 
   - title: "Revisiting the Classics: A Study on Identifying and Rectifying Gender Stereotypes in Rhymes and Poems"
     authors: "<b>Aditya Narayan Sankaran</b><sup>‡</sup>, Vigneshwaran Shankaran<sup>‡</sup>, Sampath Lonka, Rajesh Sharma"
