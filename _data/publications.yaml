@@ -1,8 +1,8 @@
 papers:
   - title: "Towards Cross-Lingual Audio Abuse Detection in Low-Resource Setting with Few-Shot Learning"
-    authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbaksh, Noel Crespi"
+    authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
     venue: "The 31st International Conference on Computational Linguistics (COLING 2025)"
-    paper_pdf: ""
+    paper_pdf: "https://arxiv.org/abs/2412.01408"
     code: "https://github.com/callmesanfornow/fsl-audio-abuse.git"
     selected: y
 
