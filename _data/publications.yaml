@@ -4,6 +4,7 @@ papers:
     venue: "The 31st International Conference on Computational Linguistics (COLING 2025)"
     paper_pdf: "https://arxiv.org/abs/2412.01408"
     code: "https://github.com/callmesanfornow/fsl-audio-abuse.git"
+    poster : assets/publications/2025_fsl_abuse/Poster-COLING.png
     selected: y
 
   - title: "Revisiting the Classics: A Study on Identifying and Rectifying Gender Stereotypes in Rhymes and Poems"
