@@ -2,15 +2,16 @@ papers:
   - title: "Towards Cross-Lingual Audio Abuse Detection in Low-Resource Setting with Few-Shot Learning"
     authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
     venue: "Proceedings of the 31st International Conference on Computational Linguistics (COLING 2025)"
-    paper_pdf: "https://arxiv.org/abs/2412.01408"
+    paper_pdf: "https://aclanthology.org/2025.coling-main.373/"
     code: "https://github.com/callmesanfornow/fsl-audio-abuse.git"
     poster : assets/publications/2025_fsl_abuse/Poster-COLING-2025.png
+    slides : "https://docs.google.com/presentation/d/e/2PACX-1vRKyqQ_oWBXnupWeFHvM429TZrKLERJ5D-MRxmh7dP98Ak12Bp1ixrc8Y4-LY3Ioy_eB_PAuSurEYFf/pub?start=false&loop=false&delayms=3000"
     selected: y
 
   - title: "Revisiting the Classics: A Study on Identifying and Rectifying Gender Stereotypes in Rhymes and Poems"
     authors: "<b>Aditya Narayan Sankaran</b><sup>‡</sup>, Vigneshwaran Shankaran<sup>‡</sup>, Sampath Lonka, Rajesh Sharma"
     venue: "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)"
-    paper_pdf: "https://aclanthology.org/2024.lrec-main.1228.pdf"
+    paper_pdf: "https://aclanthology.org/2024.lrec-main.1228"
     data: "https://github.com/s-vigneshwaran/Revisiting-The-Classics"
     poster: assets/publications/2024_revisiting_the_classics/Poster-LREC-COLING.pdf
     slides: assets/publications/2024_revisiting_the_classics/Slides-LREC-COLING.pdf
