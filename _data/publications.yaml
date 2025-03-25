@@ -8,14 +8,14 @@ papers:
     slides : 
     selected: n
 
-  - title: "Investigating Few-Shot Learning in Hate Speech Detection for Code-Mixed Indian Languages with Encoder Models"
-    authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
-    venue: "Under Review at ACL 2025"
-    paper_pdf: 
-    code: 
-    poster : 
-    slides : 
-    selected: n
+  # - title: "Investigating Few-Shot Learning in Hate Speech Detection for Code-Mixed Indian Languages with Encoder Models"
+  #   authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
+  #   venue: "Under Review at ACL 2025"
+  #   paper_pdf: 
+  #   code: 
+  #   poster : 
+  #   slides : 
+  #   selected: n
 
   - title: "Towards Cross-Lingual Audio Abuse Detection in Low-Resource Setting with Few-Shot Learning"
     authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
