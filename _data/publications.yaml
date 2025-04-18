@@ -1,12 +1,12 @@
 papers:
-  - title: "Decoding the <i>English Edge</i>: A Study of the Presence of Code-Switching in Lyrics of K-Pop Songs"
-    authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
-    venue: "Under Review at IC2S2 2025"
-    paper_pdf: 
-    code: 
-    poster : 
-    slides : 
-    selected: n
+  # - title: "Decoding the <i>English Edge</i>: A Study of the Presence of Code-Switching in Lyrics of K-Pop Songs"
+  #   authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
+  #   venue: "Under Review at IC2S2 2025"
+  #   paper_pdf: 
+  #   code: 
+  #   poster : 
+  #   slides : 
+  #   selected: n
 
   # - title: "Investigating Few-Shot Learning in Hate Speech Detection for Code-Mixed Indian Languages with Encoder Models"
   #   authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
