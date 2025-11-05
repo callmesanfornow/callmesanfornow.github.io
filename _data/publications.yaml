@@ -1,12 +1,12 @@
 papers:
   - title: "Global Beats, Local Tongue: Studying Code Switching in K-pop Hits on Billboard Charts"
     authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
-    venue: "Under Review at CHR 2025"
-    paper_pdf: 
-    code: 
+    venue: "Sixth Conference on Computational Humanities Research 2025"
+    paper_pdf: "https://arxiv.org/abs/2509.23197?"
+    code: "https://github.com/callmesanfornow/k-pop-billboard"
     poster : 
     slides : 
-    selected: n
+    selected: y
 
   # - title: "Investigating Few-Shot Learning in Hate Speech Detection for Code-Mixed Indian Languages with Encoder Models"
   #   authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
