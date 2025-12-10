@@ -3,9 +3,9 @@ papers:
     authors: "<b>Aditya Narayan Sankaran</b>, Reza Farahbakhsh, Noel Crespi"
     venue: "Sixth Conference on Computational Humanities Research 2025"
     paper_pdf: "https://anthology.ach.org/volumes/vol0003/global-beats-local-tongue-studying-code-switching/10.63744@WxgyMwUYI92t.pdf"
-    code: "https://github.com/callmesanfornow/k-pop-billboard"
+    code: "https://github.com/callmesanfornow/k-pop-billboard.git"
     poster : 
-    slides : 
+    slides : https://1drv.ms/p/c/bf504705a0552ab7/IQAyCrvMyno9Qbo1oZzkDki9AevO1h1oCBc8HZ7IjnN3ov0?e=TVmVDp
     selected: y
 
   - title: "Towards Cross-Lingual Audio Abuse Detection in Low-Resource Setting with Few-Shot Learning"
