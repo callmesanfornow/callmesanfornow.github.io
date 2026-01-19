@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
+site_theme               : "mint" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
 title                    : "Aditya Narayan SANKARAN"
 title_separator          : "-"
 name                     : &name "Aditya Narayan SANKARAN"
@@ -23,7 +23,7 @@ repository               : "callmesanfornow/callmesanfornow.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile.jpg"
   name             : "Aditya Narayan SANKARAN"
   pronouns         : "he/him/his"  
   bio              : "PhD student in Computer Science"
