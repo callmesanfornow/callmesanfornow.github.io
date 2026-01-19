@@ -1,7 +1,7 @@
 ---
 title: "Global Beats, Local Tongue: Studying Code Switching in K-pop Hits on Billboard Charts"
 collection: publications
-category: manuscripts
+category: conferences
 permalink: /publication/sankaran2025global
 excerpt: 'This paper is a primary investigation into the linguistic strategies employed in K-pop songs that achieve global chart success, with a focus on the role of code-switching and English lyric usage.'
 date: 2025-11-21

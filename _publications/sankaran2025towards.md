@@ -1,7 +1,7 @@
 ---
 title: "Towards Cross-Lingual Audio Abuse Detection in Low-Resource Settings with Few-Shot Learning"
 collection: publications
-category: manuscripts
+category: conferences
 permalink: /publication/sankaran2025towards
 excerpt: 'This paper presents a novel approach to cross-lingual audio abuse detection in low-resource settings using few-shot learning techniques.'
 date: 2025-01-24

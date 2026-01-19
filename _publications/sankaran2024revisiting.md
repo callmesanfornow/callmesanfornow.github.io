@@ -1,7 +1,7 @@
 ---
 title: "Revisiting the Classics: A Study on Identifying and Rectifying Gender Stereotypes in Rhymes and Poems"
 collection: publications
-category: manuscripts
+category: conferences
 permalink: /publication/sankaran2024revisiting
 excerpt: 'This study tries to fill the gap by using various machine-learning techniques to reduce the amount of human intervention to rectify such stereotypes. '
 date: 2024-05-22
