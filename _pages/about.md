@@ -13,8 +13,13 @@ My research focuses on the intersection of Speech and Language Technologies and 
 News
 ===
 [2025-12-08] Headed to Luxembourg for CHR 2025 to present my work on K-Pop Code-Switching . 
+
 [2025-06-29] I was part of the Summer Institute in Computational Social Science 2025 at ENSAE, Paris. 
+
 [2025-02-01] I officialy start my PhD at Télécom SudParis, Institut Polytechnique de Paris. 
+
 [2024-11-29] Our work on Few Shot Audio Abuse Detection was accepted as part of COLING 2025. 
+
 [2024-05-22] We presented our work on Gender Stereotypes in Rhymes and Poems at LREC-COLING 2024 
+
 [2024-05-02] I recieved a fellowship under the Indo-French Center for the Promotion of Advanced Research[CEFIPRA/IFCPAR] for ADEPT. 
