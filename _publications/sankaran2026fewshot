@@ -5,7 +5,7 @@ category: preprints
 permalink: /publication/sankaran2026fewshot
 excerpt: 'Abusive speech detection is becoming increasingly important as social media shifts towards voice-based interaction, particularly in multilingual and low-resource settings. This paper investigates whether Contrastive Language-Audio Pre-training (CLAP) can support abusive speech detection directly from audio, bypassing the vulnerabilities of ASR-based pipelines.'
 date: 2026-04-11
-venue: #''
+# venue: #''
 slidesurl: #'https://academicpages.github.io/files/slides3.pdf'
 paperurl: #'https://anthology.ach.org/volumes/vol0003/global-beats-local-tongue-studying-code-switching/10.63744@WxgyMwUYI92t.pdf'
 citation: 'Aditya Narayan Sankaran, Reza Farahbakhsh, and Noel Crespi. 2025. Few-Shot Contrastive Adaptation for Audio Abuse Detection in Low-Resource Indic Languages. Preprint.'
