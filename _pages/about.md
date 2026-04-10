@@ -12,7 +12,9 @@ My research focuses on the intersection of Speech and Language Technologies and 
 
 News
 ===
-**[2025-12-08]** Headed to Luxembourg for CHR 2025 to present my work on K-Pop Code-Switching . 
+**[2025-12-08]** Gave a talk at Total Energies, Paris on K-Pop Code-Switching. Find the sliedes [here](https://temtsp-my.sharepoint.com/:p:/g/personal/aditya-narayan_sankaran_telecom-sudparis_eu/IQD21RZ3LXIWRbnVpU38At6yAWhlknXhWkk5eMZqQhZeHfw?e=REZ9KK). 
+
+**[2025-12-08]** Headed to Luxembourg for CHR 2025 to present my work on K-Pop Code-Switching. 
 
 **[2025-06-29]** I was part of the Summer Institute in Computational Social Science 2025 at ENSAE, Paris. 
 
