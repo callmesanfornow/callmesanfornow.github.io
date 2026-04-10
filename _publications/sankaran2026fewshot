@@ -1,0 +1,14 @@
+---
+title: "Few-Shot Contrastive Adaptation for Audio Abuse Detection in Low-Resource Indic Languages"
+collection: publications
+category: preprints
+permalink: /publication/sankaran2026fewshot
+excerpt: 'Abusive speech detection is becoming increasingly important as social media shifts towards voice-based interaction, particularly in multilingual and low-resource settings. This paper investigates whether Contrastive Language-Audio Pre-training (CLAP) can support abusive speech detection directly from audio, bypassing the vulnerabilities of ASR-based pipelines.'
+date: 2026-04-11
+venue: #''
+slidesurl: #'https://academicpages.github.io/files/slides3.pdf'
+paperurl: #'https://anthology.ach.org/volumes/vol0003/global-beats-local-tongue-studying-code-switching/10.63744@WxgyMwUYI92t.pdf'
+citation: 'Aditya Narayan Sankaran, Reza Farahbakhsh, and Noel Crespi. 2025. Few-Shot Contrastive Adaptation for Audio Abuse Detection in Low-Resource Indic Languages. Preprint.'
+---
+
+Abusive speech detection is becoming increasingly important as social media shifts towards voice-based interaction, particularly in multilingual and low-resource settings. Most current systems rely on automatic speech recognition (ASR) followed by text-based hate speech classification, but this pipeline is vulnerable to transcription errors and discards prosodic information carried in speech. We investigate whether Contrastive Language-Audio Pre-training (CLAP) can support abusive speech detection directly from audio. Using the ADIMA dataset, we evaluate CLAP-based representations under few-shot supervised contrastive adaptation in cross-lingual and leave-one-language-out settings, with zero-shot prompting included as an auxiliary analysis. Our results show that CLAP yields strong cross-lingual audio representations across ten Indic languages, and that lightweight projection-only adaptation achieves competitive performance with respect to fully supervised systems trained on complete training data. However, the benefits of few-shot adaptation are language-dependent and not monotonic with shot size. These findings suggest that contrastive audio-text models provide a promising basis for cross-lingual audio abuse detection in low-resource settings, while also indicating that transfer remains incomplete and language-specific in important ways.
