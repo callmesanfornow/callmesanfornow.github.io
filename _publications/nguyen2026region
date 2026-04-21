@@ -1,0 +1,14 @@
+---
+title: "Few-Shot Contrastive Adaptation for Audio Abuse Detection in Low-Resource Indic Languages"
+collection: publications
+category: conferences
+permalink: /publication/nguyen2026region
+excerpt: 'Automated medical report generation for 3D PET/CT imaging is fundamentally challenged by the high-dimensional nature of volumetric data and a critical scarcity of annotated datasets, particularly for low-resource languages. This paper introduces VietPET-RoI, the first large-scale 3D PET/CT dataset with fine-grained RoI annotation for a low-resource language, and proposes HiRRA, a novel framework that mimics the professional radiologist diagnostic workflow.'
+date: 2026-04-20
+venue: 'Proceedings of the 2026 Annual Meeting of the Association for Computational Linguistics'
+slidesurl: #'https://academicpages.github.io/files/slides3.pdf'
+paperurl: 'https://arxiv.org/pdf/2604.18145'
+citation: 'Nguyen, Cong Huy et al. “Region-Grounded Report Generation for 3D Medical Imaging: A Fine-Grained Dataset and Graph-Enhanced Framework.” (2026). ACL 2026.'
+---
+
+Automated medical report generation for 3D PET/CT imaging is fundamentally challenged by the high-dimensional nature of volumetric data and a critical scarcity of annotated datasets, particularly for low-resource languages. Current black-box methods map whole volumes to reports, ignoring the clinical workflow of analyzing localized Regions of Interest (RoIs) to derive diagnostic conclusions. In this paper, we bridge this gap by introducing VietPET-RoI, the first large-scale 3D PET/CT dataset with fine-grained RoI annotation for a low-resource language, comprising 600 PET/CT samples and 1,960 manually annotated RoIs, paired with corresponding clinical reports. Furthermore, to demonstrate the utility of this dataset, we propose HiRRA, a novel framework that mimics the professional radiologist diagnostic workflow by employing graph-based relational modules to capture dependencies between RoI attributes. This approach shifts from global pattern matching toward localized clinical findings. Additionally, we introduce new clinical evaluation metrics, namely RoI Coverage and RoI Quality Index, that measure both RoI localization accuracy and attribute description fidelity using LLM-based extraction. Extensive evaluation demonstrates that our framework achieves SOTA performance, surpassing existing models by 19.7% in BLEU and 4.7% in ROUGE-L, while achieving a remarkable 45.8% improvement in clinical metrics, indicating enhanced clinical reliability and reduced hallucination. Our code and dataset are available on GitHub.
