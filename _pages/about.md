@@ -14,6 +14,10 @@ My research focuses on the intersection of Speech and Language Technologies and 
 
 News
 ===
+**[2026-04-20]** Our paper on region-grounded 3D PET/CT report generation for Vietnamese, with AI4LIFE at Hanoi University of Science and Technology, will appear at ACL 2026. Read it [here](https://arxiv.org/abs/2604.18145). 
+
+**[2026-04-11]** New preprint on few-shot contrastive adaptation (CLAP) for audio abuse detection in low-resource Indic languages. Read it [here](https://arxiv.org/abs/2604.09094). 
+
 **[2025-12-08]** Gave a talk at Total Energies, Paris on K-Pop Code-Switching. Find the slides [here](https://temtsp-my.sharepoint.com/:p:/g/personal/aditya-narayan_sankaran_telecom-sudparis_eu/IQD21RZ3LXIWRbnVpU38At6yAWhlknXhWkk5eMZqQhZeHfw?e=REZ9KK). 
 
 **[2025-12-08]** Headed to Luxembourg for CHR 2025 to present my work on K-Pop Code-Switching. 
