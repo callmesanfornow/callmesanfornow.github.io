@@ -11,7 +11,7 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Computer Science, Télécom SudParis, 2028 (expected)
+* Ph.D in Computer Science, Télécom SudParis, November 2027 (expected)
 * Masters in Data Science and Computing, [SSSIHL](https://www.sssihl.edu.in/), 2024
 * Bachelors in Computer Applications, [SSSIHL](https://www.sssihl.edu.in/), 2021
 
