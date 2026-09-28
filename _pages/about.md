@@ -6,7 +6,7 @@ redirect_from:
   - /about/
   - /about.html
 ---
-**Research focus:** I build and evaluate methods for detecting abusive and hateful language in low-resource, multilingual and code-switched settings, across speech and text, using pre-trained representations and asking what they actually capture about language, speakers and bias.
+<!-- **Research focus:** I build and evaluate methods for detecting abusive and hateful language in low-resource, multilingual and code-switched settings, across speech and text, using pre-trained representations and asking what they actually capture about language, speakers and bias. -->
 
 Hi! I am a PhD student in Computer Science at the Data Intelligence and Communication Engineering Lab of Télécom SudParis, Institut Polytechnique de Paris, where I am supervised by [Noel Crespi](https://scholar.google.com/citations?user=z_-5wSkAAAAJ) and [Reza Farahbakhsh](https://scholar.google.com/citations?user=HukBnBlWTE0C&). I am a recipient of a fellowship under the Indo-French Center for the Promotion of Advanced Research[CEFIPRA/IFCPAR] for the [ADEPT](https://ifindia.cdn.betanet.in/ifindia/uploads/2024/03/PhD-in-AI-Computer-Science.pdf) project.
 
