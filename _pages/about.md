@@ -18,16 +18,16 @@ News
 
 **[2026-04-11]** New preprint on few-shot contrastive adaptation (CLAP) for audio abuse detection in low-resource Indic languages. Read it [here](https://arxiv.org/abs/2604.09094). 
 
-**[2025-12-08]** Gave a talk at Total Energies, Paris on K-Pop Code-Switching. Find the slides [here](https://temtsp-my.sharepoint.com/:p:/g/personal/aditya-narayan_sankaran_telecom-sudparis_eu/IQD21RZ3LXIWRbnVpU38At6yAWhlknXhWkk5eMZqQhZeHfw?e=REZ9KK). 
+**[2026-03-04]** Gave a talk at Total Energies, Paris on K-Pop Code-Switching. Find the slides [here](/files/Presentations/SANKARAN-Total-2026.pdf). 
 
-**[2025-12-08]** Headed to Luxembourg for CHR 2025 to present my work on K-Pop Code-Switching. 
+**[2025-12-08]** Headed to Luxembourg for CHR 2025 to present my work on K-Pop Code-Switching. Find the slides [here](/files/Presentations/SANKARAN-CHR-2025.pdf). 
 
 **[2025-06-29]** I was part of the Summer Institute in Computational Social Science 2025 at ENSAE, Paris. 
 
 **[2025-02-01]** I officialy start my PhD at Télécom SudParis, Institut Polytechnique de Paris. 
 
 **[2024-11-29]** Our work on Few Shot Audio Abuse Detection was accepted as part of COLING 2025. 
-
+ 
 **[2024-05-22]** We presented our work on Gender Stereotypes in Rhymes and Poems at LREC-COLING 2024 
 
 **[2024-05-02]** I recieved a fellowship under the Indo-French Center for the Promotion of Advanced Research[CEFIPRA/IFCPAR] for ADEPT. 
