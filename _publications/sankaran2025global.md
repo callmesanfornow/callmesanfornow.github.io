@@ -6,7 +6,7 @@ permalink: /publication/sankaran2025global
 excerpt: 'This paper is a primary investigation into the linguistic strategies employed in K-pop songs that achieve global chart success, with a focus on the role of code-switching and English lyric usage.'
 date: 2025-11-21
 venue: 'Anthology of Computers and the Humanities'
-slidesurl: #'https://academicpages.github.io/files/slides3.pdf'
+slidesurl: '/files/Presentations/SANKARAN-CHR-2025.pdf'
 paperurl: 'https://anthology.ach.org/volumes/vol0003/global-beats-local-tongue-studying-code-switching/10.63744@WxgyMwUYI92t.pdf'
 citation: 'Aditya Narayan Sankaran, Reza Farahbakhsh, and Noel Crespi. 2025. Global Beats, Local Tongue: Studying Code Switching in K-pop Hits on Billboard Charts. In Proceedings of the Anthology of Computers and the Humanities.'
 ---
