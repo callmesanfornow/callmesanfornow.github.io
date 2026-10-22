@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agents as Power Brokers: slides</title>
+
+<!-- === FONTS ===
+     Google Fonts need an internet connection. Without it the deck falls back to
+     Georgia (headlines) and the system sans/mono, which still lay out correctly. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================
+   THEME TOKENS
+   Change colours / fonts here to restyle the whole deck.
+   =========================================== */
+:root {
+    --stage-bg: #E9E6DF;            /* letterbox colour around the 16:9 stage */
+    --slide-bg: #FBFAF7;            /* warm white paper */
+    --ink: #121212;                 /* main text */
+    --muted: #6A6A66;               /* secondary text */
+    --hint: #A3A29C;                /* chrome, captions */
+    --grid: rgba(0, 0, 0, 0.055);   /* visible 120px grid */
+    --rule: #121212;
+    --peak: #E4572E;                /* the 7 pm peak: "today" */
+    --calm: #13878A;                /* "with agents" */
+    --wash: #F3EFE7;                /* card fill */
+
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+    --pad: 120px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+
+/* ===========================================
+   SLIDE SURFACE: paper + visible grid
+   =========================================== */
+.slide {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background-color: var(--slide-bg);
+    background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 120px 120px;
+}
+
+/* ===========================================
+   SHARED CHROME: top bar with deck name + page number
+   =========================================== */
+.chrome {
+    position: absolute; left: var(--pad); right: var(--pad); top: 72px;
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 20px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--hint);
+    padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.14);
+}
+.chrome b { color: var(--peak); font-weight: 500; }
+
+/* ===========================================
+   TYPE SYSTEM
+   Serif headlines; italics carry the accent colour.
+   =========================================== */
+.kicker {
+    font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--peak);
+}
+h1, h2 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.015em; }
+h1 { font-size: 118px; line-height: 1.02; }
+h2 { font-size: 86px; line-height: 1.06; }
+h1 em, h2 em { font-style: italic; color: var(--peak); }
+h1 em.calm, h2 em.calm { color: var(--calm); }
+.lead { font-size: 34px; line-height: 1.42; color: var(--muted); }
+.mono { font-family: var(--font-mono); }
+.caption {
+    font-family: var(--font-mono); font-size: 17px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--hint);
+}
+
+/* Positioned blocks (all coordinates authored for the 1920x1080 stage) */
+.abs { position: absolute; }
+
+/* ===========================================
+   ANIMATION: staggered reveal when a slide becomes visible
+   =========================================== */
+.reveal { opacity: 0; transform: translateY(28px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.slide.visible .reveal { opacity: 1; transform: none; }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .22s; }
+.d3 { transition-delay: .38s; } .d4 { transition-delay: .54s; }
+.d5 { transition-delay: .70s; } .d6 { transition-delay: .86s; }
+
+/* ===========================================
+   LOAD CURVE (reused on slides 1 and 7)
+   The orange line draws itself, then the teal "with agents" line fades in.
+   =========================================== */
+.curve-wrap { position: absolute; left: 0; right: 0; bottom: 0; height: 430px; }
+.curve-wrap svg { position: absolute; inset: 0; width: 1920px; height: 430px; max-width: none; max-height: none; }
+.curve-wrap .today { fill: none; stroke: var(--peak); stroke-width: 4; stroke-linejoin: round;
+    stroke-dasharray: 1000; stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 2.4s cubic-bezier(.65,0,.35,1) .5s; }
+.curve-wrap .agents { fill: none; stroke: var(--calm); stroke-width: 4; stroke-linejoin: round; stroke-dasharray: 10 7;
+    opacity: 0; transition: opacity 1s ease 2.7s; }
+.curve-wrap .area { fill: var(--peak); opacity: 0; transition: opacity 1s ease 2.7s; }
+.slide.visible .curve-wrap .today { stroke-dashoffset: 0; }
+.slide.visible .curve-wrap .agents { opacity: 1; }
+.slide.visible .curve-wrap .area { opacity: .08; }
+.limit { position: absolute; left: 0; right: 0; border-top: 2px dashed rgba(0,0,0,0.28); }
+.limit span { position: absolute; right: var(--pad); top: -36px; }
+.axis { position: absolute; left: var(--pad); right: var(--pad); bottom: 34px;
+    display: flex; justify-content: space-between; }
+.tag { position: absolute; font-family: var(--font-mono); font-size: 20px; letter-spacing: .12em; }
+.tag.today { color: var(--peak); } .tag.agents { color: var(--calm); opacity: 0; transition: opacity 1s ease 2.8s; }
+.slide.visible .tag.agents { opacity: 1; }
+
+/* ===========================================
+   SLIDE 4: the street, drawn as building outlines
+   =========================================== */
+.street { position: absolute; left: var(--pad); right: var(--pad); bottom: 250px; height: 460px;
+    display: flex; align-items: flex-end; gap: 34px; border-bottom: 4px solid var(--ink); }
+.bldg { position: relative; border: 3px solid var(--ink); border-bottom: none; background: var(--slide-bg);
+    transform-origin: bottom; transform: scaleY(0); transition: transform .9s var(--ease); }
+.slide.visible .bldg { transform: scaleY(1); }
+.bldg.hot { background: var(--wash); }
+.bldg .dot { position: absolute; top: 18px; right: 18px; width: 18px; height: 18px; border-radius: 50%; background: var(--peak); }
+.bldg .dot.calm { background: var(--calm); }
+.bldg.station { border-style: dashed; border-color: var(--calm); }
+.labels { position: absolute; left: var(--pad); right: var(--pad); bottom: 110px; display: flex; gap: 34px; }
+.labels div { font-size: 26px; line-height: 1.3; }
+.labels b { display: block; font-family: var(--font-serif); font-weight: 600; font-size: 31px; margin-bottom: 6px; }
+.labels span { color: var(--muted); }
+
+/* ===========================================
+   SLIDE 5: evening timeline (five steps)
+   =========================================== */
+.steps { position: absolute; left: var(--pad); right: var(--pad); top: 520px; display: grid;
+    grid-template-columns: repeat(5, 1fr); border-top: 3px solid var(--ink); }
+.step { padding: 34px 30px 0 0; }
+.step .t { font-family: var(--font-mono); font-size: 20px; color: var(--peak); letter-spacing: .1em; }
+.step h3 { font-family: var(--font-serif); font-weight: 400; font-size: 46px; margin: 14px 0 14px; }
+.step p { font-size: 25px; line-height: 1.4; color: var(--muted); }
+.roles { position: absolute; left: var(--pad); right: var(--pad); bottom: 110px; display: flex; gap: 60px;
+    font-family: var(--font-mono); font-size: 21px; letter-spacing: .08em; color: var(--muted); }
+.roles b { color: var(--ink); font-weight: 500; }
+
+/* ===========================================
+   SLIDE 6: agent quote + three-way comparison
+   =========================================== */
+.quote { font-family: var(--font-serif); font-style: italic; font-size: 60px; line-height: 1.22; }
+.quote::before { content: "“"; color: var(--peak); }
+.quote::after { content: "”"; color: var(--peak); }
+.cmp { position: absolute; left: var(--pad); right: var(--pad); bottom: 110px; display: grid;
+    grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.cmp div { border-top: 3px solid var(--ink); padding-top: 24px; font-size: 27px; line-height: 1.4; color: var(--muted); }
+.cmp b { display: block; color: var(--ink); font-family: var(--font-serif); font-weight: 600; font-size: 36px; margin-bottom: 8px; }
+.cmp .us { border-top-color: var(--calm); }
+.cmp .us b { color: var(--calm); }
+
+/* ===========================================
+   SLIDE 7: proof (data sources + pending metric tiles)
+   =========================================== */
+.chips { display: flex; flex-wrap: wrap; gap: 14px; width: 760px; }
+.chip { font-family: var(--font-mono); font-size: 21px; padding: 12px 18px; border: 2px solid var(--ink); background: var(--slide-bg); }
+.tiles { position: absolute; right: var(--pad); top: 300px; width: 860px; display: grid; gap: 22px; }
+.tile { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 26px 32px;
+    background: var(--wash); border-left: 6px solid var(--peak); }
+.tile.calm { border-left-color: var(--calm); }
+.tile .k { font-family: var(--font-serif); font-size: 36px; }
+.tile .k small { display: block; font-family: var(--font-body); font-size: 22px; color: var(--muted); margin-top: 4px; }
+.tile .v { font-family: var(--font-mono); font-size: 22px; color: var(--hint); letter-spacing: .1em; text-transform: uppercase; }
+.rules { position: absolute; left: var(--pad); right: var(--pad); bottom: 110px; display: flex; gap: 0;
+    border-top: 3px solid var(--ink); }
+.rules div { flex: 1; padding: 22px 48px 0 0; font-size: 26px; line-height: 1.35; color: var(--muted); }
+.rules b { display: block; color: var(--ink); font-family: var(--font-serif); font-weight: 600; font-size: 32px; }
+
+/* ===========================================
+   SLIDE 8: four showcase weeks (2x2)
+   =========================================== */
+.weeks { position: absolute; left: var(--pad); right: var(--pad); top: 360px; bottom: 110px;
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 26px; }
+.week { padding: 30px 36px; background: var(--slide-bg); border: 2px solid var(--ink); position: relative; }
+.week.bad { background: var(--wash); border-color: var(--peak); }
+.week .when { font-family: var(--font-mono); font-size: 19px; letter-spacing: .12em; text-transform: uppercase; color: var(--hint); }
+.week.bad .when { color: var(--peak); }
+.week h3 { font-family: var(--font-serif); font-weight: 400; font-size: 44px; margin: 10px 0 10px; }
+.week p { font-size: 25px; line-height: 1.4; color: var(--muted); max-width: 720px; }
+.week .hero { position: absolute; right: 30px; top: 30px; font-family: var(--font-mono); font-size: 17px;
+    letter-spacing: .12em; color: #fff; background: var(--peak); padding: 6px 12px; }
+
+/* ===========================================
+   SLIDE 9: market map
+   =========================================== */
+.market { position: absolute; left: var(--pad); right: var(--pad); top: 430px; display: grid;
+    grid-template-columns: repeat(4, 1fr); gap: 30px; }
+.market div { border-top: 3px solid var(--ink); padding-top: 24px; font-size: 26px; line-height: 1.4; color: var(--muted); }
+.market b { display: block; font-family: var(--font-serif); font-weight: 600; font-size: 38px; color: var(--ink); margin-bottom: 8px; }
+.market .us { border-top: 6px solid var(--calm); }
+.market .us b { color: var(--calm); }
+.model { position: absolute; left: var(--pad); right: var(--pad); bottom: 110px; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.model div { background: var(--wash); padding: 24px 30px; font-size: 25px; color: var(--muted); line-height: 1.35; }
+.model b { display: block; color: var(--ink); font-size: 28px; margin-bottom: 4px; }
+
+
+/* v2 additions */
+.days { position: absolute; left: 0; right: 0; bottom: 34px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.days span { padding-left: 14px; border-left: 2px solid rgba(0,0,0,0.18); }
+.big { font-family: var(--font-serif); font-size: 96px; line-height: 1; }
+.lead b { color: var(--ink); font-weight: 500; }
+.mono-row { display: flex; gap: 22px; font-family: var(--font-mono); font-size: 26px; color: var(--muted); }
+.mono-row span { border: 2px solid var(--calm); padding: 12px 20px; }
+.mono-row b { color: var(--calm); font-weight: 500; }
+.tiles { top: 260px; gap: 18px; }
+.tile { padding: 20px 32px; }
+.tile .v.num { font-family: var(--font-serif); font-size: 60px; color: var(--peak); letter-spacing: 0; text-transform: none; }
+.tile .v.num.calm { color: var(--calm); }
+.limit-item { border-top: 3px solid var(--ink); padding-top: 20px; font-size: 27px; line-height: 1.4; color: var(--muted); }
+.limit-item b { display: block; font-family: var(--font-serif); font-weight: 600; font-size: 36px; color: var(--ink); margin-bottom: 6px; }
+
+/* ===========================================
+   NON-SLIDE UI: progress bar + inline editing (outside the stage)
+   =========================================== */
+.progress { position: fixed; left: 0; bottom: 0; height: 4px; background: var(--peak);
+    z-index: 1000; transition: width .4s var(--ease); }
+.edit-hotzone { position: fixed; top: 0; left: 0; width: 80px; height: 80px; z-index: 10000; cursor: pointer; }
+.edit-toggle { position: fixed; top: 16px; left: 16px; z-index: 10001; width: 46px; height: 46px; border-radius: 50%;
+    border: 2px solid var(--ink); background: #fff; font-size: 20px; cursor: pointer;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.edit-toggle.show, .edit-toggle.active { opacity: 1; pointer-events: auto; }
+.edit-toggle.active { background: var(--peak); color: #fff; border-color: var(--peak); }
+body.editing [contenteditable="true"] { outline: 2px dashed rgba(228,87,46,.5); outline-offset: 4px; }
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage">
+<!-- =====================================================
+     SLIDE 1: TITLE (real curve: Fri 17 Jan 2025, a Tempo red day in the cold-wave week, seed 1, data/hero_week.json)
+     ===================================================== -->
+<section class="slide active" aria-label="Title">
+    <div class="chrome reveal d1"><span>Passion project <b>·</b> proof of concept</span><span>AI agents as power brokers</span></div>
+    <div class="kicker abs reveal d2" style="left:120px; top:200px;">Street-level energy agents</div>
+    <h1 class="abs reveal d2" style="left:120px; top:260px; width:1500px;">One street. One transformer.<br>An agent <em>in every home.</em></h1>
+    <p class="lead abs reveal d3" style="left:120px; top:520px; width:1060px;">Each home saves for itself. A station agent keeps the street’s cable in check. Tested on last winter’s real French data.</p>
+    <div class="tag today" style="left:1290px; top:540px;">━ OFF-PEAK TIMERS</div>
+    <div class="tag agents" style="left:1290px; top:580px;">╍ AGENTS + STATION</div>
+
+    <div class="limit" style="top:770px;"><span class="caption" style="left:var(--pad); right:auto;">Transformer limit · 400 kVA (assumed)</span></div>
+    <div class="curve-wrap">
+        <svg viewBox="0 0 1920 430" preserveAspectRatio="none" aria-hidden="true">
+            <path class="area" d="M0.0,271.8 C6.7,271.8 20.0,262.2 40.0,271.8 C60.0,281.4 93.3,313.5 120.0,329.2 C146.7,344.8 173.3,359.8 200.0,365.7 C226.7,371.5 253.3,367.6 280.0,364.1 C306.7,360.7 333.3,351.3 360.0,345.0 C386.7,338.7 413.3,348.3 440.0,326.3 C466.7,304.4 493.3,241.5 520.0,213.1 C546.7,184.7 573.3,173.7 600.0,156.1 C626.7,138.5 653.3,113.0 680.0,107.3 C706.7,101.5 733.3,114.0 760.0,121.5 C786.7,129.0 813.3,145.0 840.0,152.3 C866.7,159.6 893.3,164.0 920.0,165.0 C946.7,166.1 973.3,150.8 1000.0,158.8 C1026.7,166.7 1053.3,198.9 1080.0,212.7 C1106.7,226.6 1133.3,233.8 1160.0,241.8 C1186.7,249.8 1213.3,258.6 1240.0,260.6 C1266.7,262.6 1293.3,259.0 1320.0,253.9 C1346.7,248.9 1373.3,245.7 1400.0,230.2 C1426.7,214.7 1453.3,178.4 1480.0,160.7 C1506.7,142.9 1533.3,127.2 1560.0,123.8 C1586.7,120.4 1613.3,156.2 1640.0,140.1 C1666.7,124.1 1693.3,47.6 1720.0,27.7 C1746.7,7.7 1773.3,-6.0 1800.0,20.2 C1826.7,46.5 1860.0,157.7 1880.0,185.2 C1900.0,212.7 1913.3,185.2 1920.0,185.2 L1920,430 L0,430 Z"/>
+            <path class="today" pathLength="1000" d="M0.0,271.8 C6.7,271.8 20.0,262.2 40.0,271.8 C60.0,281.4 93.3,313.5 120.0,329.2 C146.7,344.8 173.3,359.8 200.0,365.7 C226.7,371.5 253.3,367.6 280.0,364.1 C306.7,360.7 333.3,351.3 360.0,345.0 C386.7,338.7 413.3,348.3 440.0,326.3 C466.7,304.4 493.3,241.5 520.0,213.1 C546.7,184.7 573.3,173.7 600.0,156.1 C626.7,138.5 653.3,113.0 680.0,107.3 C706.7,101.5 733.3,114.0 760.0,121.5 C786.7,129.0 813.3,145.0 840.0,152.3 C866.7,159.6 893.3,164.0 920.0,165.0 C946.7,166.1 973.3,150.8 1000.0,158.8 C1026.7,166.7 1053.3,198.9 1080.0,212.7 C1106.7,226.6 1133.3,233.8 1160.0,241.8 C1186.7,249.8 1213.3,258.6 1240.0,260.6 C1266.7,262.6 1293.3,259.0 1320.0,253.9 C1346.7,248.9 1373.3,245.7 1400.0,230.2 C1426.7,214.7 1453.3,178.4 1480.0,160.7 C1506.7,142.9 1533.3,127.2 1560.0,123.8 C1586.7,120.4 1613.3,156.2 1640.0,140.1 C1666.7,124.1 1693.3,47.6 1720.0,27.7 C1746.7,7.7 1773.3,-6.0 1800.0,20.2 C1826.7,46.5 1860.0,157.7 1880.0,185.2 C1900.0,212.7 1913.3,185.2 1920.0,185.2"/>
+            <path class="agents" d="M0.0,377.6 C6.7,377.6 20.0,392.0 40.0,377.6 C60.0,363.2 93.3,311.1 120.0,291.2 C146.7,271.2 173.3,260.2 200.0,257.9 C226.7,255.7 253.3,293.3 280.0,277.9 C306.7,262.5 333.3,181.7 360.0,165.4 C386.7,149.2 413.3,187.5 440.0,180.4 C466.7,173.4 493.3,128.9 520.0,123.2 C546.7,117.5 573.3,135.6 600.0,146.2 C626.7,156.8 653.3,175.5 680.0,186.7 C706.7,197.8 733.3,209.3 760.0,213.1 C786.7,216.9 813.3,213.5 840.0,209.5 C866.7,205.4 893.3,196.3 920.0,188.8 C946.7,181.3 973.3,176.4 1000.0,164.7 C1026.7,152.9 1053.3,103.3 1080.0,118.5 C1106.7,133.6 1133.3,230.4 1160.0,255.7 C1186.7,280.9 1213.3,267.9 1240.0,270.1 C1266.7,272.3 1293.3,272.7 1320.0,269.1 C1346.7,265.6 1373.3,261.4 1400.0,248.8 C1426.7,236.2 1453.3,212.1 1480.0,193.5 C1506.7,175.0 1533.3,148.7 1560.0,137.5 C1586.7,126.3 1613.3,133.0 1640.0,126.3 C1666.7,119.5 1693.3,96.7 1720.0,96.8 C1746.7,97.0 1773.3,93.6 1800.0,127.2 C1826.7,160.8 1860.0,269.9 1880.0,298.4 C1900.0,326.9 1913.3,298.4 1920.0,298.4"/>
+        </svg>
+        <div class="days caption"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00 · Fri 17 Jan 2025, a red day</span></div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 2: THE PROBLEM (winter 2024-25, 222 homes, 5 seeds; report table station_winter)
+     ===================================================== -->
+<section class="slide" aria-label="Problem">
+    <div class="chrome"><span>The problem</span><span>02 / 11</span></div>
+    <div class="kicker abs reveal d1" style="left:120px; top:200px;">What we found</div>
+    <h2 class="abs reveal d2" style="left:120px; top:260px; width:1600px;">Smart homes, each acting alone, <em>make the street worse.</em></h2>
+    <div class="abs" style="left:120px; top:560px; width:1680px; display:grid; grid-template-columns:repeat(3,1fr); gap:40px;">
+        <div class="reveal d3" style="border-top:3px solid var(--ink); padding-top:26px;">
+            <div class="big" style="color:var(--ink);">1,080</div>
+            <p class="lead" style="margin-top:14px;">kVAh over the limit with simple <b>off-peak timers</b></p></div>
+        <div class="reveal d4" style="border-top:3px solid var(--peak); padding-top:26px;">
+            <div class="big" style="color:var(--peak);">2,764</div>
+            <p class="lead" style="margin-top:14px;">with <b>smart homes optimising alone</b>: they all pick the same cheap hours</p></div>
+        <div class="reveal d5" style="border-top:3px solid var(--calm); padding-top:26px;">
+            <div class="big" style="color:var(--calm);">624</div>
+            <p class="lead" style="margin-top:14px;">with our <b>station agent</b>: −77&nbsp;% vs smart homes, −42&nbsp;% vs timers</p></div>
+    </div>
+    <p class="caption abs reveal d6" style="left:120px; bottom:110px;">Winter 2024–25 · 222 simulated homes · 400 kVA transformer · median of 5 random streets</p>
+</section>
+
+<!-- =====================================================
+     SLIDE 3: WHY NOW
+     ===================================================== -->
+<section class="slide" aria-label="Why now">
+    <div class="chrome"><span>Why now</span><span>03 / 11</span></div>
+    <h2 class="abs reveal d1" style="left:120px; top:250px; width:1500px;">Old streets, <em>new loads.</em></h2>
+    <div class="abs" style="left:120px; top:500px; width:1680px; display:grid; grid-template-columns:repeat(3,1fr); gap:40px;">
+        <div class="reveal d2" style="border-top:3px solid var(--ink); padding-top:26px;">
+            <div class="big" style="color:var(--peak);">22</div>
+            <p class="lead" style="margin-top:14px;">red days each winter on EDF Tempo: every smart home reacts to the same signal</p></div>
+        <div class="reveal d3" style="border-top:3px solid var(--ink); padding-top:26px;">
+            <div class="big" style="color:var(--ink);">EVs</div>
+            <p class="lead" style="margin-top:14px;">and heat pumps arriving on streets wired for yesterday’s demand</p></div>
+        <div class="reveal d4" style="border-top:3px solid var(--calm); padding-top:26px;">
+            <div class="big" style="color:var(--calm);">LLMs</div>
+            <p class="lead" style="margin-top:14px;">small enough to run locally, good enough to turn plain words into settings</p></div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 4: MEET RUE DES VOISINS (the cast)
+     ===================================================== -->
+<section class="slide" aria-label="Meet Rue des Voisins">
+    <div class="chrome"><span>Meet Rue des Voisins</span><span>04 / 11</span></div>
+    <h2 class="abs reveal d1" style="left:120px; top:200px; width:1600px;">222 homes and shops, <em class="calm">one transformer.</em></h2>
+    <div class="street">
+        <div class="bldg hot" style="flex:1; height:250px; transition-delay:.15s;"><span class="dot"></span></div>
+        <div class="bldg" style="flex:1; height:220px; transition-delay:.25s;"><span class="dot"></span></div>
+        <div class="bldg hot" style="flex:1.3; height:170px; transition-delay:.35s;"><span class="dot"></span></div>
+        <div class="bldg" style="flex:1.3; height:190px; transition-delay:.45s;"><span class="dot"></span></div>
+        <div class="bldg hot" style="flex:1.1; height:420px; transition-delay:.55s;"><span class="dot"></span></div>
+        <div class="bldg station" style="flex:.7; height:140px; transition-delay:.65s;"><span class="dot calm"></span></div>
+    </div>
+    <div class="labels reveal d5">
+        <div style="flex:1;"><b>The Martins</b><span>electric radiators, EV</span></div>
+        <div style="flex:1;"><b>Tank houses</b><span>electric hot-water tank</span></div>
+        <div style="flex:1.3;"><b>Frozen-food shop</b><span>freezers that can pre-cool</span></div>
+        <div style="flex:1.3;"><b>Click &amp; collect</b><span>cold storage, opening hours</span></div>
+        <div style="flex:1.1;"><b>The blocks</b><span>flats matched to real meter totals</span></div>
+        <div style="flex:.7;"><b style="color:var(--calm)">Station</b><span>the referee</span></div>
+    </div>
+    <p class="caption abs reveal d6" style="left:120px; bottom:40px;">Real building stock from public data (BDNB); the households are synthetic.</p>
+</section>
+
+<!-- =====================================================
+     SLIDE 5: HOW IT WORKS
+     ===================================================== -->
+<section class="slide" aria-label="How it works">
+    <div class="chrome"><span>How it works</span><span>05 / 11</span></div>
+    <div class="kicker abs reveal d1" style="left:120px; top:250px;">Every evening, before tomorrow</div>
+    <h2 class="abs reveal d1" style="left:120px; top:310px; width:1600px;">Homes plan. <em class="calm">The station referees.</em></h2>
+    <div class="steps">
+        <div class="step reveal d2"><div class="t">18:00</div><h3>Brief</h3><p>Each home reads only what is known tonight: prices, Tempo colour, forecast</p></div>
+        <div class="step reveal d3"><div class="t">18:05</div><h3>Plan</h3><p>An optimiser finds the cheapest plan that keeps every comfort rule</p></div>
+        <div class="step reveal d4"><div class="t">18:10</div><h3>Check</h3><p>The station adds up all plans against the transformer limit</p></div>
+        <div class="step reveal d5"><div class="t">18:15</div><h3>Nudge</h3><p>The biggest contributors re-plan; a change is kept only if the street gets better</p></div>
+        <div class="step reveal d6"><div class="t">18:20</div><h3>Explain</h3><p>Each home gets its plan in plain words</p></div>
+    </div>
+    <div class="roles reveal d6">
+        <span><b>Optimiser</b> · the maths engine</span><span><b>Language model</b> · plain words in and out</span><span><b>Checkers</b> · block anything a resident ruled out</span>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 6: WHY AGENTS (a synthetic resident note from the test set, and the model's actual reading)
+     ===================================================== -->
+<section class="slide" aria-label="Why agents">
+    <div class="chrome"><span>Why agents, not a timer</span><span>06 / 11</span></div>
+    <div class="kicker abs reveal d1" style="left:120px; top:200px;">A resident’s note, as written</div>
+    <p class="quote abs reveal d2" style="left:120px; top:260px; width:1640px; font-size:52px;">I leave for work at half past eight. I’m back and plugged in by eight in the evening. I need the battery about four fifths full.</p>
+    <div class="kicker abs reveal d3" style="left:120px; top:520px; color:var(--calm);">What the agent sets</div>
+    <div class="abs reveal d3 mono-row" style="left:120px; top:570px;">
+        <span>leave <b>08:30</b></span><span>back <b>20:00</b></span><span>battery <b>80&nbsp;%</b></span><span>laundry <b>Mon Tue Wed Sat</b></span>
+    </div>
+    <div class="cmp">
+        <div class="reveal d4"><b>98.5&nbsp;%</b>of settings read correctly from test notes by a small open model</div>
+        <div class="reveal d5"><b>94&nbsp;%</b>on 20 hand-written notes, 6 of them in French</div>
+        <div class="us reveal d6"><b>0</b>invalid settings reached a plan: a checker rejects them first</div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 7: PROOF
+     ===================================================== -->
+<section class="slide" aria-label="Proof">
+    <div class="chrome"><span>How we prove it</span><span>07 / 11</span></div>
+    <h2 class="abs reveal d1" style="left:120px; top:200px; width:900px;">Real data.<br><em>Last winter.</em></h2>
+    <div class="abs reveal d2" style="left:120px; top:490px;">
+        <div class="caption" style="margin-bottom:18px;">Public French data</div>
+        <div class="chips">
+            <span class="chip">RTE eCO2mix</span><span class="chip">Tempo calendar</span><span class="chip">Enedis load curves</span>
+            <span class="chip">BDNB buildings</span><span class="chip">Open-Meteo forecasts</span><span class="chip">ENTSO-E prices</span>
+        </div>
+    </div>
+    <div class="tiles">
+        <div class="tile reveal d3"><div class="k">Per electric-heated home<small>Tempo tariff, vs off-peak timer, per year</small></div><div class="v num">€293</div></div>
+        <div class="tile calm reveal d4"><div class="k">Overload at the transformer<small>station vs smart homes alone, winter</small></div><div class="v num calm">−77&nbsp;%</div></div>
+        <div class="tile calm reveal d5"><div class="k">Comfort broken<small>hours below anyone’s minimum</small></div><div class="v num calm">0</div></div>
+        <div class="tile calm reveal d6"><div class="k">Forbidden changes blocked<small>when a model said yes to a resident’s “never”</small></div><div class="v num calm">17 / 17</div></div>
+    </div>
+    <div class="rules reveal d6">
+        <div><b>No peeking</b>agents only see what was known at 18:00 the day before</div>
+        <div><b>Whole seasons</b>not hand-picked days</div>
+        <div><b>Tough baselines</b>timer · perfect-foresight optimiser</div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 8: ONE HARD WEEK, WHOLE SEASONS (5-seed medians; report tables)
+     ===================================================== -->
+<section class="slide" aria-label="Results">
+    <div class="chrome"><span>Results</span><span>08 / 11</span></div>
+    <h2 class="abs reveal d1" style="left:120px; top:180px; width:1600px;">One hard week, <em>whole seasons.</em></h2>
+    <div class="weeks">
+        <div class="week bad reveal d2"><span class="hero">HERO WEEK</span><div class="when">Cold wave · 13–19 Jan 2025 · red days</div><h3>631 → 222 kVAh over</h3><p>The station cuts the overload by two thirds; with a 5&nbsp;% safety margin, to 51</p></div>
+        <div class="week reveal d3"><div class="when">Whole winter · Nov–Mar</div><h3>€38 for the whole street</h3><p>The cost of coordinating: 12 homes pay a little more, at most €36 over the winter</p></div>
+        <div class="week reveal d4"><div class="when">Summer</div><h3>Little to shift</h3><p>Savings come from winter. Moving off-peak hours to midday lowers bills but raises the summer peak</p></div>
+        <div class="week bad reveal d5"><div class="when">Tomorrow · half the homes with an EV</div><h3>The cost concentrates</h3><p>About 126 homes pay more, up to €81 each. Someone has to settle that fairly</p></div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 9: WHAT WE HAVE NOT SHOWN
+     ===================================================== -->
+<section class="slide" aria-label="Limits">
+    <div class="chrome"><span>What we have not shown</span><span>09 / 11</span></div>
+    <h2 class="abs reveal d1" style="left:120px; top:200px; width:1600px;">Honest about <em>the limits.</em></h2>
+    <div class="abs" style="left:120px; top:450px; width:1680px; display:grid; grid-template-columns:1fr 1fr; gap:44px 60px;">
+        <div class="reveal d2 limit-item"><b>Simulated, not metered</b>Savings come from a backtest on real data, not from real bills</div>
+        <div class="reveal d3 limit-item"><b>Synthetic households</b>Real buildings and real meter totals, invented families</div>
+        <div class="reveal d4 limit-item"><b>The transformer is a guess</b>Its size, and whether the big shop shares it, only the network operator knows. Without the shop, today’s street stays under 400&nbsp;kVA</div>
+        <div class="reveal d5 limit-item"><b>Claude not yet tested</b>All agent results so far use small open models on our own GPU</div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 10: MARKET AND MODEL
+     ===================================================== -->
+<section class="slide" aria-label="Market">
+    <div class="chrome"><span>Market</span><span>10 / 11</span></div>
+    <h2 class="abs reveal d1" style="left:120px; top:200px; width:1600px;">Others manage a home.<br><em class="calm">We coordinate the street.</em></h2>
+    <div class="market">
+        <div class="reveal d2"><b>Voltalis</b>top-down: switches heating off at peaks</div>
+        <div class="reveal d3"><b>Tibber</b>one home at a time: smart EV and battery</div>
+        <div class="reveal d4"><b>Enogrid</b>shares solar inside communities</div>
+        <div class="us reveal d5"><b>Us</b>bottom-up agents that share one transformer</div>
+    </div>
+    <div class="model reveal d6">
+        <div><b>Network operators</b>street-scale flexibility, like today’s local flexibility tenders</div>
+        <div><b>Residents</b>a free app: plain words, plain answers, a veto</div>
+        <div><b>Fairness ledger</b>who gave flexibility, who gets paid back</div>
+    </div>
+</section>
+
+<!-- =====================================================
+     SLIDE 11: CLOSE
+     ===================================================== -->
+<section class="slide" aria-label="Close">
+    <div class="chrome"><span>What’s next</span><span>11 / 11</span></div>
+    <h1 class="abs reveal d1" style="left:120px; top:250px; width:1600px;">Rue des Voisins first.<br><em>Then every stressed street.</em></h1>
+    <div class="abs reveal d3" style="left:120px; top:640px; width:1680px; display:grid; grid-template-columns:repeat(3,1fr); gap:40px;">
+        <div style="border-top:3px solid var(--ink); padding-top:22px;"><div class="kicker" style="color:var(--ink)">Next</div><p class="lead" style="margin-top:10px;">Ask the network operator for the real transformer and who shares it</p></div>
+        <div style="border-top:3px solid var(--ink); padding-top:22px;"><div class="kicker" style="color:var(--ink)">Then</div><p class="lead" style="margin-top:10px;">Claude agents vs open models, same tests</p></div>
+        <div style="border-top:3px solid var(--calm); padding-top:22px;"><div class="kicker" style="color:var(--calm)">Looking for</div><p class="lead" style="margin-top:10px;">One real street to pilot on</p></div>
+    </div>
+    <div class="caption abs reveal d4" style="left:120px; bottom:110px;">Aditya Sankaran · Télécom SudParis</div>
+</section>
+
+</main>
+</div>
+
+<!-- Non-slide UI -->
+<div class="progress" id="progress"></div>
+<div class="edit-hotzone"></div>
+<button class="edit-toggle" id="editToggle" title="Edit mode (E)" aria-label="Toggle edit mode">✎</button>
+
+<script>
+/* ===========================================
+   SLIDE PRESENTATION CONTROLLER
+   Keyboard (arrows, space, page up/down, home/end), wheel, touch swipe.
+   =========================================== */
+class SlidePresentation {
+    constructor() {
+        this.slides = [...document.querySelectorAll('.slide')];
+        this.current = 0;
+        this.stage = document.getElementById('deckStage');
+        this.progress = document.getElementById('progress');
+        this.wheelLock = false;
+        this.scaleStage();
+        addEventListener('resize', () => this.scaleStage());
+        this.bindKeys(); this.bindWheel(); this.bindTouch();
+        const start = parseInt(location.hash.replace('#', ''), 10);
+        this.show(Number.isFinite(start) ? start - 1 : 0);
+    }
+    /* Scale the fixed 1920x1080 stage uniformly; never reflow content. */
+    scaleStage() {
+        const f = Math.min(innerWidth / 1920, innerHeight / 1080);
+        const x = (innerWidth - 1920 * f) / 2, y = (innerHeight - 1080 * f) / 2;
+        this.stage.style.transform = `translate(${x}px, ${y}px) scale(${f})`;
+    }
+    show(i) {
+        this.current = Math.max(0, Math.min(i, this.slides.length - 1));
+        this.slides.forEach((s, k) => {
+            const on = k === this.current;
+            s.classList.toggle('active', on);
+            s.classList.remove('visible');
+        });
+        // Re-trigger entrance animations on the newly active slide.
+        requestAnimationFrame(() => requestAnimationFrame(() =>
+            this.slides[this.current].classList.add('visible')));
+        this.progress.style.width = `${((this.current + 1) / this.slides.length) * 100}%`;
+        history.replaceState(null, '', `#${this.current + 1}`);
+    }
+    next() { this.show(this.current + 1); }
+    prev() { this.show(this.current - 1); }
+    bindKeys() {
+        document.addEventListener('keydown', e => {
+            if (document.body.classList.contains('editing')) return;
+            if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); this.next(); }
+            if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); this.prev(); }
+            if (e.key === 'Home') this.show(0);
+            if (e.key === 'End') this.show(this.slides.length - 1);
+        });
+    }
+    bindWheel() {
+        addEventListener('wheel', e => {
+            if (this.wheelLock || document.body.classList.contains('editing')) return;
+            this.wheelLock = true; setTimeout(() => this.wheelLock = false, 700);
+            e.deltaY > 0 ? this.next() : this.prev();
+        }, { passive: true });
+    }
+    bindTouch() {
+        let x0 = null;
+        addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
+        addEventListener('touchend', e => {
+            if (x0 === null) return;
+            const dx = e.changedTouches[0].clientX - x0;
+            if (Math.abs(dx) > 40) dx < 0 ? this.next() : this.prev();
+            x0 = null;
+        });
+    }
+}
+const deck = new SlidePresentation();
+
+/* ===========================================
+   INLINE EDITING
+   Hover top-left corner or press E. Edits auto-save to this browser;
+   Ctrl/Cmd+S downloads an edited copy of the file.
+   =========================================== */
+const editor = {
+    isActive: false,
+    key: 'rue-des-voisins-deck-edits-v1',
+    selector: 'h1, h2, h3, p, .kicker, .caption, .labels b, .labels span, .cmp div, .market div, .model div, .chip, .tile .k, .week .when, .step .t',
+    toggleEditMode() {
+        this.isActive = !this.isActive;
+        document.body.classList.toggle('editing', this.isActive);
+        document.getElementById('editToggle').classList.toggle('active', this.isActive);
+        document.querySelectorAll(this.selector).forEach(el => el.setAttribute('contenteditable', this.isActive));
+        if (!this.isActive) this.save();
+    },
+    save() {
+        try {
+            const data = [...document.querySelectorAll(this.selector)].map(el => el.innerHTML);
+            localStorage.setItem(this.key, JSON.stringify(data));
+        } catch (e) { /* storage may be unavailable; editing still works for this session */ }
+    },
+    load() {
+        try {
+            const raw = localStorage.getItem(this.key); if (!raw) return;
+            const data = JSON.parse(raw); const els = document.querySelectorAll(this.selector);
+            if (data.length === els.length) els.forEach((el, i) => el.innerHTML = data[i]);
+        } catch (e) { /* ignore */ }
+    },
+    download() {
+        this.save();
+        document.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+        const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+        a.download = 'rue-des-voisins-pitch-edited.html'; a.click();
+        if (this.isActive) document.querySelectorAll(this.selector).forEach(el => el.setAttribute('contenteditable', true));
+    }
+};
+editor.load();
+const toggle = document.getElementById('editToggle');
+const hotzone = document.querySelector('.edit-hotzone');
+let hideTimeout = null;
+toggle.addEventListener('click', () => editor.toggleEditMode());
+hotzone.addEventListener('click', () => editor.toggleEditMode());
+hotzone.addEventListener('mouseenter', () => { clearTimeout(hideTimeout); toggle.classList.add('show'); });
+hotzone.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { if (!editor.isActive) toggle.classList.remove('show'); }, 400); });
+toggle.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+toggle.addEventListener('mouseleave', () => { hideTimeout = setTimeout(() => { if (!editor.isActive) toggle.classList.remove('show'); }, 400); });
+document.addEventListener('keydown', e => {
+    const inText = e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true';
+    if ((e.key === 'e' || e.key === 'E') && !inText) editor.toggleEditMode();
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); editor.download(); }
+});
+</script>
+</body>
+</html>
