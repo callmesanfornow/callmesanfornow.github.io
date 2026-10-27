@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<title>Class poll</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe9df; --ink:#1f2bd6; --ink-soft:#4a55e0; --rule:rgba(31,43,214,.28); --grid:rgba(31,43,214,.05);
+  --card:#f7f3ec; --muted:#5b628f; --ok:#0f7a4a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#12142a; --ink:#c9cdff; --ink-soft:#a3a9ff; --rule:rgba(201,205,255,.25);
+    --card:#1a1d3a; --muted:#9aa0cc; --ok:#5fd39a; --grid:rgba(201,205,255,.05);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12142a; --ink:#c9cdff; --ink-soft:#a3a9ff; --rule:rgba(201,205,255,.25);
+  --card:#1a1d3a; --muted:#9aa0cc; --ok:#5fd39a; --grid:rgba(201,205,255,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink)}
+body{
+  overflow-x:hidden;
+  font-family:'DM Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+  min-height:100vh;padding:20px 16px 32px;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;background-position:-1px -1px;
+  background-color:var(--paper);
+}
+.wrap{max-width:520px;margin:0 auto}
+.bar{display:flex;justify-content:space-between;font:500 11px/1 'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid var(--ink)}
+.live{display:inline-flex;align-items:center;gap:6px}
+.live i{width:7px;height:7px;border-radius:50%;background:#d33;animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+h1{font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:44px;line-height:1.05;margin:28px 0 10px}
+.lead{font-size:16px;line-height:1.5;color:var(--muted);margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:18px}
+.q{font:500 11px/1 'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:transparent;border:1.5px solid var(--ink);color:var(--ink);
+  border-radius:8px;padding:16px;margin-bottom:12px;font:500 19px/1.2 'DM Sans',sans-serif;cursor:pointer;transition:background .15s}
+.opt:active,.opt:hover{background:rgba(31,43,214,.08)}
+.opt .k{font:500 13px/1 'DM Mono',monospace;border:1px solid var(--ink);border-radius:4px;padding:6px 8px}
+.fine{font-size:12px;color:var(--muted);line-height:1.5;margin-top:14px}
+.fine b{font-weight:600;color:var(--ink)}
+#result.off{position:absolute;left:-10000px;top:0;width:min(520px,100vw - 32px)}
+.got{font:500 11px/1 'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ok);margin:24px 0 8px}
+.verdict{font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:46px;line-height:1.05;margin-bottom:18px}
+.player{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--rule);background:#000}
+.player > *{position:absolute;inset:0;width:100%;height:100%}
+.again{display:inline-block;margin-top:14px;color:var(--ink);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar"><span>DANI · Lecture 04</span><span class="live"><i></i>Poll open</span></div>
+
+  <section id="poll">
+    <h1>Math or no math?</h1>
+    <p class="lead">The next part of today's lecture depends on this vote. Choose one option. Results are shown on the main screen.</p>
+    <div class="card">
+      <p class="q">Question 1 of 1</p>
+      <button class="opt" data-v="math"><span class="k">A</span>Math</button>
+      <button class="opt" data-v="nomath"><span class="k">B</span>No math</button>
+      <p class="fine"><b>Anonymous.</b> One vote per device. Your choice cannot be changed after you submit.</p>
+    </div>
+  </section>
+
+  <section id="result" class="off">
+    <p class="got">✓ Vote recorded</p>
+    <p class="verdict">You have to do math.</p>
+    <div class="player"><div id="yt"></div></div>
+    <a class="again" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">Video not playing? Open it here.</a>
+  </section>
+</div>
+
+
+<script>
+var player = null, ready = false, voted = false, playing = false;
+var WATCH = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+var tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(tag);
+function onYouTubeIframeAPIReady(){
+  player = new YT.Player('yt', {
+    videoId: 'dQw4w9WgXcQ',
+    host: 'https://www.youtube-nocookie.com',
+    playerVars: { playsinline: 1, rel: 0, modestbranding: 1 },
+    events: {
+      onReady: function(){ ready = true; },
+      // If the embed is refused, send the phone to YouTube itself
+      onError: function(){ if (voted) window.location.href = WATCH; },
+      onStateChange: function(e){ if (e.data === 1) playing = true; }
+    }
+  });
+}
+document.querySelectorAll('.opt').forEach(function(b){
+  b.addEventListener('click', function(){
+    voted = true;
+    document.getElementById('poll').style.display = 'none';
+    document.getElementById('result').classList.remove('off');
+    window.scrollTo(0, 0);
+    if (ready) { try { player.unMute(); player.setVolume(100); player.playVideo(); } catch (e) {} }
+    // Embeds can fail silently (e.g. error 153), so if nothing plays within 4 s, open YouTube itself
+    setTimeout(function(){ if (!playing) window.location.href = WATCH; }, ready ? 4000 : 2000);
+  });
+});
+</script>
+</body>
+</html>
