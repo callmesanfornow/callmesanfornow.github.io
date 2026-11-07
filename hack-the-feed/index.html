@@ -25,6 +25,9 @@ h1, h2, h3, .ui { font-family: system-ui, -apple-system, "Segoe UI", Roboto, san
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px 48px; }
 header { padding: 24px 0 12px; border-bottom: 2px solid var(--text); display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
 h1 { margin: 0; font-size: clamp(1.9rem, 5vw, 2.9rem); letter-spacing: -0.025em; line-height: 1.08; }
+.codetop { margin: 8px 0 0; font: 600 .9rem system-ui, sans-serif; }
+.codetop a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+.codetop a:hover { border-color: var(--text); }
 .sub { margin: 4px 0 0; color: var(--muted); font-style: italic; }
 h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em; margin: 36px 0 10px; }
 .lang { display: inline-flex; border: 1px solid var(--text); border-radius: 6px; overflow: hidden; }
@@ -186,6 +189,7 @@ details.ctx > summary:hover { color: var(--c-racist); }
       <h1 data-i18n="title"></h1>
       <p class="sub" data-i18n="subtitle"></p>
       <p class="sub" id="positioning" style="font-style:normal;color:var(--text);margin-top:8px;max-width:60ch"></p>
+      <p class="codetop"><a href="https://github.com/callmesanfornow/racist-narrative-radar" target="_blank" rel="noopener" data-i18n="code_top"></a></p>
     </div>
     <div class="lang" role="group" aria-label="Language / Langue">
       <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
@@ -263,6 +267,7 @@ details.ctx > summary:hover { color: var(--c-racist); }
       amp_badge: "Amplified", amp_line: "\u00d7{x} views per follower",
       off_explain: "Spoken, not written = the racist part is only said or shown in the video, never in the caption or hashtags \u2014 caption and hashtag search cannot see it.",
       off_line: "{p} spoken, not written",
+      code_top: "Open-source code on GitHub ↗",
       code_link: "Open-source code on GitHub (MIT): racist-narrative-radar ↗",
       open_video: "Open the video ↗", limits_links: "Slurs are masked. Links to the videos are shown for review until {t} (Paris time), then removed.", footer_links: "Links to the videos are shown temporarily for review. Quotes stay in their original French.",
       ctx_h: "The rest of the conversation (AI labels, slurs masked)", ctx_sum: "{l} — {n} videos: show examples", ctx_sum_1: "{l} — 1 video: show the example",
@@ -321,6 +326,7 @@ details.ctx > summary:hover { color: var(--c-racist); }
       amp_badge: "Amplifié", amp_line: "\u00d7{x} vues par abonné",
       off_explain: "Dit, pas écrit = la partie raciste est seulement dite ou montrée dans la vidéo, jamais dans la légende ni les hashtags \u2014 une recherche par légende ou hashtag ne la voit pas.",
       off_line: "{p} dit, pas écrit",
+      code_top: "Code open source sur GitHub ↗",
       code_link: "Code open source sur GitHub (MIT) : racist-narrative-radar ↗",
       open_video: "Voir la vidéo ↗", limits_links: "Les insultes sont masquées. Les liens vers les vidéos sont affichés pour relecture jusqu’au {t} (heure de Paris), puis retirés.", footer_links: "Les liens vers les vidéos sont affichés temporairement pour relecture. Les citations restent en français.",
       ctx_h: "Le reste de la conversation (étiquettes de l’IA, insultes masquées)", ctx_sum: "{l} — {n} vidéos : voir des exemples", ctx_sum_1: "{l} — 1 vidéo : voir l’exemple",
