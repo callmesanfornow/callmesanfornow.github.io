@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Racist-narrative radar</title>
+<meta name="robots" content="noindex">
+<style>
+:root {
+  --bg: #f7f6f2; --surface: #ffffff; --text: #1c1f24; --muted: #565d69; --line: #d6d3ca;
+  --accent: #1c1f24; --warn: #b3261e; --warn-bg: #fbe9e7; --note-bg: #f0eee8;
+  --c-racist: #b3261e; --c-review: #e9aaa4; --c-counter: #2a7653; --c-news: #55657c; --c-irrelevant: #666b73; --on-seg: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171b; --surface: #1d2127; --text: #e8e6e1; --muted: #a0a7b1; --line: #343a42;
+    --accent: #e8e6e1; --warn: #ff8a80; --warn-bg: #3a1f1d; --note-bg: #23272e;
+    --c-racist: #ff8a80; --c-review: #7a3b36; --c-counter: #6fcf9f; --c-news: #9db0c9; --c-irrelevant: #98a0aa; --on-seg: #14171b;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 17px/1.55 Georgia, "Iowan Old Style", "Times New Roman", serif; }
+h1, h2, h3, .ui { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px 48px; }
+header { padding: 24px 0 12px; border-bottom: 2px solid var(--text); display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+h1 { margin: 0; font-size: clamp(1.9rem, 5vw, 2.9rem); letter-spacing: -0.025em; line-height: 1.08; }
+.sub { margin: 4px 0 0; color: var(--muted); font-style: italic; }
+h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em; margin: 36px 0 10px; }
+.lang { display: inline-flex; border: 1px solid var(--text); border-radius: 6px; overflow: hidden; }
+.lang button { font: 600 .9rem system-ui, sans-serif; padding: 6px 14px; background: transparent; color: var(--text); border: 0; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+.lang button:focus-visible, .row:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.banner { background: var(--warn-bg); border-left: 4px solid var(--warn); padding: 10px 14px; margin: 16px 0 0; font-family: system-ui, sans-serif; font-size: .92rem; }
+.lead { font-size: clamp(1.15rem, 2.6vw, 1.5rem); line-height: 1.4; margin: 6px 0 18px; max-width: 54ch; }
+.meta { color: var(--muted); font-size: .85rem; margin-top: 8px; font-family: system-ui, sans-serif; }
+.panel { background: var(--surface); border: 1px solid var(--line); padding: 16px 18px; }
+.pending { color: var(--muted); font-style: italic; }
+.error { background: var(--warn-bg); border-left: 4px solid var(--warn); padding: 12px 16px; margin-top: 20px; font-family: system-ui, sans-serif; }
+
+/* funnel */
+.fbar { margin: 0 0 22px; }
+.fbar .cap { font: 600 1rem system-ui, sans-serif; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+.fbar .cap .n { color: var(--muted); font-weight: 400; }
+.bar { display: flex; height: 56px; width: 100%; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.bar.small { height: 38px; }
+.bar span { display: flex; align-items: center; justify-content: center; color: var(--on-seg); font: 700 1rem system-ui, sans-serif; overflow: hidden; white-space: nowrap; min-width: 0; }
+.bar .s-racist_sure { background: var(--c-racist); } .bar .s-counter_speech { background: var(--c-counter); }
+.bar .s-news_reporting { background: var(--c-news); } .bar .s-irrelevant { background: var(--c-irrelevant); }
+.hatch { background: repeating-linear-gradient(45deg, var(--c-racist) 0 3px, var(--c-review) 3px 7px); }
+.bar .s-racist_review { background: repeating-linear-gradient(45deg, var(--c-racist) 0 3px, var(--c-review) 3px 7px); color: var(--text); }
+.bar .s-racist_review b { background: var(--surface); padding: 0 5px; border-radius: 3px; font-weight: 700; }
+.legend { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 10px; font-family: system-ui, sans-serif; }
+@media (max-width: 900px) { .legend { grid-template-columns: repeat(2, 1fr); } }
+.legend .k { display: flex; align-items: center; gap: 6px; font-size: .9rem; color: var(--muted); }
+.legend .k i { width: 12px; height: 12px; border-radius: 2px; display: inline-block; flex: none; }
+.legend .v { font-size: clamp(1.25rem, 3vw, 1.8rem); font-weight: 700; line-height: 1.2; }
+.legend .v small { font-size: .85rem; font-weight: 400; color: var(--muted); }
+.keep { margin-top: 14px; font: 1.05rem system-ui, sans-serif; border-left: 4px solid var(--c-racist); padding: 4px 0 4px 14px; }
+.keep b { font-size: 1.4rem; }
+.bar-note { color: var(--muted); font: .85rem system-ui, sans-serif; margin: 8px 0 0; }
+
+/* narratives */
+.cols, .row { display: grid; grid-template-columns: minmax(0, 1fr) 150px 130px 100px; gap: 14px; align-items: center; }
+.cols { padding: 0 14px 6px; font: .8rem system-ui, sans-serif; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.cols .r, .row .r { text-align: right; }
+.nlist { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); background: var(--surface); }
+.nlist > li { border-bottom: 1px solid var(--line); }
+.nlist > li:last-child { border-bottom: 0; }
+.row { all: unset; box-sizing: border-box; width: 100%; padding: 14px; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 150px 130px 100px; gap: 14px; align-items: center; font-family: system-ui, sans-serif; }
+.row:hover { background: var(--note-bg); }
+.row .nm { font-size: 1.2rem; font-weight: 600; line-height: 1.3; }
+.row .nm small { display: block; font-weight: 400; font-size: .85rem; color: var(--muted); margin-top: 2px; }
+.row .num { font-size: 1.3rem; font-weight: 700; text-align: right; }
+.row .num small { display: block; font-size: .72rem; font-weight: 400; color: var(--muted); }
+.row .num.few { font-size: .8rem; font-weight: 400; color: var(--muted); line-height: 1.3; }
+.row[aria-expanded="true"] { background: var(--note-bg); box-shadow: inset 4px 0 0 var(--accent); }
+.badge.amp { background: var(--accent); }
+.up { color: var(--c-racist); }
+svg.spark { width: 150px; height: 36px; display: block; }
+.badge { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 10px; font: 700 .72rem system-ui, sans-serif; background: var(--warn); color: var(--bg); vertical-align: middle; white-space: nowrap; }
+@media (max-width: 720px) {
+  .cols { display: none; }
+  .row { grid-template-columns: 1fr 1fr 1fr; }
+  .row .nmc { grid-column: 1 / -1; }
+  .row svg.spark { width: 100%; }
+  .row .num { text-align: left; }
+}
+.detail { padding: 6px 16px 18px; }
+.detail p.desc { margin: 4px 0 10px; color: var(--muted); }
+.detail h3 { font-size: .95rem; text-transform: uppercase; letter-spacing: .05em; margin: 18px 0 6px; }
+.keyl { display: flex; gap: 14px; flex-wrap: wrap; font: .82rem system-ui, sans-serif; margin: 6px 0 4px; }
+.keyl i { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 2px; }
+svg.chart { width: 100%; height: auto; display: block; }
+svg.chart text { fill: var(--muted); font: 11px system-ui, sans-serif; }
+svg.chart .axis { stroke: var(--line); }
+.cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+.card { border: 1px solid var(--line); background: var(--surface); padding: 12px 14px; font-size: .95rem; display: flex; flex-direction: column; gap: 8px; }
+.card .tag { font: .78rem system-ui, sans-serif; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.card .lab { background: var(--c-racist); color: var(--on-seg); border-radius: 3px; padding: 1px 7px; font-weight: 700; }
+.card .ts { font-weight: 700; color: var(--text); }
+.card .q { margin: 0; }
+.card mark { background: var(--warn-bg); color: var(--text); padding: 0 2px; border-bottom: 2px solid var(--warn); }
+.card .vlink { font: 600 .85rem system-ui, sans-serif; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); align-self: flex-start; padding-bottom: 1px; }
+.card .vlink:hover { border-color: var(--text); }
+.card .why { font: .85rem system-ui, sans-serif; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 6px; }
+.clusters { font: .9rem system-ui, sans-serif; margin: 4px 0 0; padding-left: 18px; }
+
+/* method */
+.steps { counter-reset: s; list-style: none; padding: 0; margin: 0 0 8px; display: grid; gap: 8px; grid-template-columns: repeat(5, 1fr); font-family: system-ui, sans-serif; }
+@media (max-width: 900px) { .steps { grid-template-columns: 1fr; } }
+.steps li { counter-increment: s; border: 1px solid var(--line); background: var(--note-bg); padding: 10px 12px; font-size: .92rem; }
+.steps li::before { content: counter(s); display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 50%; background: var(--accent); color: var(--bg); font-weight: 700; margin-right: 8px; font-size: .8rem; }
+.eval { display: flex; gap: 32px; flex-wrap: wrap; margin: 6px 0; }
+.eval .big { font: 700 2.2rem system-ui, sans-serif; line-height: 1.1; }
+.eval .lab { font: .85rem system-ui, sans-serif; color: var(--muted); max-width: 26ch; }
+.eval .big.second { font-size: 1.5rem; color: var(--muted); }
+.evtext { font: .9rem system-ui, sans-serif; color: var(--muted); margin: 8px 0; }
+.hc { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line); font: .95rem system-ui, sans-serif; }
+.hc small { display: block; color: var(--muted); font-size: .8rem; margin-top: 2px; }
+.define { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--line); font-family: system-ui, sans-serif; font-size: .92rem; }
+.define h3 { margin: 0 0 4px; }
+.twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 760px) { .twocol { grid-template-columns: 1fr; } }
+.panel ul { padding-left: 20px; margin: 6px 0; }
+.panel h3 { margin: 0 0 6px; font-size: 1rem; }
+details { margin-top: 8px; font: .85rem system-ui, sans-serif; color: var(--muted); }
+details.ctx { font: inherit; color: var(--text); margin-top: 10px; }
+details.ctx > summary { cursor: pointer; font-weight: 700; padding: 6px 0; }
+details.ctx .cards { margin-top: 8px; }
+footer { margin-top: 36px; color: var(--muted); font: .82rem system-ui, sans-serif; }
+footer p { margin: 4px 0; }
+
+/* ---- 7 Nov: the brief (front page) ---- */
+.brief { margin: 18px 0 6px; padding: 4px 0 4px; }
+.brief .kicker { font: 700 .8rem system-ui, sans-serif; text-transform: uppercase; letter-spacing: .14em; color: var(--c-racist); margin: 0; }
+.brief .brief-sub { margin: 6px 0 16px; color: var(--muted); font-style: italic; }
+.findings { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.findings li { padding: 16px 18px 18px 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.findings li + li { padding-left: 18px; border-left: 1px solid var(--line); }
+.findings .stat { white-space: nowrap; font: 800 clamp(1.7rem, 3.2vw, 2.15rem)/1 system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.findings li:first-child .stat { color: var(--c-racist); }
+.findings .ftext { font-size: 1rem; line-height: 1.45; }
+.findings .go { margin-top: auto; font: 600 .85rem system-ui, sans-serif; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); align-self: flex-start; padding-bottom: 2px; transition: border-color .15s ease, transform .15s ease; }
+.findings .go:hover { border-color: var(--text); transform: translateX(3px); }
+.brief .rising { margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--line); font: .95rem system-ui, sans-serif; }
+.brief .brief-foot { margin: 6px 0 0; color: var(--muted); font: .82rem system-ui, sans-serif; }
+@media (max-width: 1100px) {
+  .findings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .findings li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .findings li:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  .findings { grid-template-columns: 1fr; }
+  .findings li, .findings li + li { padding-left: 0; border-left: 0; }
+  .findings li + li { border-top: 1px solid var(--line); }
+}
+/* ---- 7 Nov: micro-interactions ---- */
+html { scroll-behavior: smooth; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.row { transition: background-color .15s ease; }
+.row[aria-expanded="true"] { box-shadow: none; }
+.row .nm::before { content: "\25B8"; display: inline-block; width: 1.1em; color: var(--muted); transition: transform .18s ease, color .18s ease; }
+.row[aria-expanded="true"] .nm::before { transform: rotate(90deg); color: var(--c-racist); }
+.detail:not([hidden]) { animation: rise .2s ease-out both; }
+@keyframes rise { from { transform: translateY(-6px); } to { transform: none; } }
+details.ctx > summary { list-style: none; transition: color .15s ease; }
+details.ctx > summary::-webkit-details-marker { display: none; }
+details.ctx > summary::before { content: "\25B8"; display: inline-block; width: 1.1em; transition: transform .18s ease; }
+details.ctx[open] > summary::before { transform: rotate(90deg); }
+details.ctx > summary:hover { color: var(--c-racist); }
+.lang button { transition: background-color .15s ease, color .15s ease, transform .1s ease; }
+.lang button:active { transform: scale(.96); }
+.card { transition: border-color .15s ease; }
+.card:hover { border-color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1 data-i18n="title"></h1>
+      <p class="sub" data-i18n="subtitle"></p>
+      <p class="sub" id="positioning" style="font-style:normal;color:var(--text);margin-top:8px;max-width:60ch"></p>
+    </div>
+    <div class="lang" role="group" aria-label="Language / Langue">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-lang="fr" aria-pressed="false" lang="fr">FR</button>
+    </div>
+  </header>
+
+  <div id="synthetic" class="banner" hidden></div>
+  <div id="error" class="error" role="alert" hidden></div>
+
+  <main id="main" hidden>
+    <section id="brief" class="brief" aria-labelledby="h-brief" hidden></section>
+
+    <section aria-labelledby="h-funnel">
+      <h2 id="h-funnel" data-i18n="funnel_h"></h2>
+      <p class="lead" data-i18n="lead"></p>
+      <div id="funnel" class="panel"></div>
+    </section>
+
+    <section aria-labelledby="h-narr">
+      <h2 id="h-narr" data-i18n="narr_h"></h2>
+      <p class="meta" data-i18n="narr_sub" style="margin:-4px 0 2px"></p>
+      <p class="meta" data-i18n="amp_explain" style="margin:0 0 4px"></p>
+      <p class="meta" data-i18n="off_explain" style="margin:0 0 10px"></p>
+      <div class="cols" aria-hidden="true">
+        <div data-i18n="col_narr"></div><div data-i18n="col_trend"></div><div class="r" data-i18n="col_change"></div><div class="r" data-i18n="col_reach"></div>
+      </div>
+      <ul id="nlist" class="nlist"></ul>
+    </section>
+
+    <section aria-labelledby="h-method">
+      <h2 id="h-method" data-i18n="method_h"></h2>
+      <div class="panel">
+        <h3 data-i18n="pipeline_h"></h3>
+        <ol class="steps" id="steps"></ol>
+        <div class="define">
+          <h3 data-i18n="define_h"></h3>
+          <p data-i18n="define_p" style="margin:0"></p>
+        </div>
+        <div class="twocol" style="margin-top:16px">
+          <div>
+            <h3 data-i18n="eval_h"></h3>
+            <div id="eval"></div>
+          </div>
+          <div>
+            <h3 data-i18n="limits_h"></h3>
+            <ul id="limits"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="meta" class="meta"></div>
+  <footer>
+    <p id="credits"></p>
+    <p data-i18n="footer"></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var I18N = {
+    en: {
+      positioning: "A video analyser explains one video. This radar explains a storyline \u2014 across {n} videos and {w} weeks.",
+      define_h: "What we count as racist",
+      define_p: "Content that attacks, demeans, stereotypes or excludes people because of their origin, ethnicity, skin colour, or religion as an identity. Not counted: reporting on racism, people pushing back against it, opinions on immigration policy, and criticism of a religion's ideas. The same rule applies whatever the political side; we track storylines, never people or parties.",
+      review_line: "<b>{n}</b> more flags the AI is unsure about are not counted here: a person checks them.",
+      few_trend: "Too few videos to call a trend", range_line: "{a} \u2192 {b} videos", review_short: "+{k} unsure (a person checks)",
+      weeks_left: "{k} recent week(s) left out of the trends (not fully indexed yet)",
+      amp_explain: "Amplified = seen far beyond the creators' own followers (through recommendations or shares).",
+      amp_badge: "Amplified", amp_line: "\u00d7{x} views per follower",
+      off_explain: "Spoken, not written = the racist part is only said or shown in the video, never in the caption or hashtags \u2014 caption and hashtag search cannot see it.",
+      off_line: "{p} spoken, not written",
+      open_video: "Open the video ↗", limits_links: "Slurs are masked. Links to the videos are shown for review until {t} (Paris time), then removed.", footer_links: "Links to the videos are shown temporarily for review. Quotes stay in their original French.",
+      ctx_h: "The rest of the conversation (AI labels, slurs masked)", ctx_sum: "{l} — {n} videos: show examples", ctx_sum_1: "{l} — 1 video: show the example",
+      tone: "Reactions — pushing back: {c} · reporting: {n} · racist (AI sure): {r}",
+      off_total: "<b>{p}</b> of these racist items say it only out loud or on screen, never in the caption or hashtags \u2014 invisible to hashtag-based moderation and social listening.",
+      title: "Racist-narrative radar", subtitle: "Proof of concept for newsroom social and verification desks",
+      page_title: "Racist-narrative radar",
+      synthetic: "<b>Synthetic data.</b> All figures and texts on this page are invented for demonstration.",
+      funnel_h: "What keyword search would have shown you",
+      lead: "Keyword search finds every video that uses the words. Our radar keeps the ones that are actually racist \u2014 and shows which racist storylines are spreading, and how far.",
+      bar_main: "Everything the search returned, judged by the model",
+      items: "{n} items", items_1: "1 item", ofwhich: "{p} racist",
+      keep: "The radar keeps only the red part: <b>{n}</b> items ({p}) — the rest is counter-speech, news coverage or off-topic.",
+      keep_1: "The radar keeps only the red part: <b>1</b> item ({p}) — the rest is counter-speech, news coverage or off-topic.",
+      cmp: "Keyword-only search returns {n} items and only {p} of them are racist (AI sure).",
+      l_racist: "Racist", l_counter_speech: "Pushing back against racism", l_news_reporting: "Reporting on racism", l_irrelevant: "Off-topic",
+      l_racist_sure: "Racist (AI sure)", l_racist_review: "Racist? (AI unsure \u2014 a person checks)",
+      narr_h: "Narratives, ranked by rise", narr_sub: "Rising first, then by change over the last four weeks. Only videos the AI is sure are racist are counted.",
+      col_narr: "Narrative", col_trend: "Racist items per week", col_change: "Change, 4 weeks", col_reach: "Reach (views)",
+      rising: "Rising", new_: "new", items_short: "{n} racist items", items_short_1: "1 racist item",
+      hist_h: "Weekly volume", ev_h: "Evidence (slurs masked; AI flags, not yet checked by a person)", sub_h: "Sub-narratives",
+      no_week: "No dated videos for this narrative.", no_ex: "No confirmed example for this narrative.",
+      chart_label: "Stacked weekly bar chart", wk_tip: "{d}: {r} racist, {c} counter-speech, {n} news",
+      cl_item: "{n} videos — {t}", cl_rising: " (rising)",
+      week_of: "week of {d}", date_unknown: "date unknown", at: "at {t}", views: "views", conf: "confidence {p}",
+      why: "Model rationale: ", mrk_label: "Racist",
+      method_h: "Method and limits", pipeline_h: "How it works",
+      steps: ["Oriane search finds short videos by what they say, put on screen and caption", "An open AI model reads each video and labels it, saying how sure it is", "Racist items are sorted into storylines", "Weekly trends flag what is rising", "This page: evidence you can check"],
+      eval_h: "How often does it raise a false alarm?", eval_fpr: "False-positive rate", eval_prec: "Precision", eval_rec: "Recall",
+      in100: "{x} in 100", fa_sure: "false alarms when the AI is sure", fa_all: "{x} in 100 counting every flag",
+      eval_tested: "Tested on {n} harmless posts that look risky (people pushing back against racism, neutral mentions of groups), labelled by people.",
+      eval_tested_nn: "Tested on harmless posts that look risky (people pushing back against racism, neutral mentions of groups), labelled by people.",
+      hc_pending: "Human check on real videos: pending. A blind check by French-speaking journalists, fixed in advance, comes next.",
+      hc_main: "Checked by a person who did not see the AI's answer: {y} of {n} radar flags were racist. Keyword search: {ky} of {kn}.",
+      hc_main_nk: "Checked by a person who did not see the AI's answer: {y} of {n} radar flags were racist.",
+      hc_ci: "95 % intervals \u2014 radar {lo}\u2013{hi}", hc_ci_k: "; keyword search {lo}\u2013{hi}",
+      hc_review: "Of the flags the AI was unsure about, {p} were racist (checked: {n}).",
+      hc_story: "Storyline correct for {p} of {n} checked videos.",
+      eval_n_prec: "on {n} synthetic test cases", eval_soon: "Coming soon — evaluation on a hand-checked sample.",
+      eval_note: "Notes on the evaluation",
+      limits_h: "Limits",
+      limits: ["Leads, not verdicts: in a newsroom, a person checks every item before publication. The examples on this page are AI flags not yet checked by a person.", "Tracks narratives, never people or parties.", "Slurs are masked; no handles, video IDs or links appear here.", "Not covered yet: antisemitism (it needs its own expert search list and test set \u2014 first on our roadmap) and hate based on gender, sexuality or disability.", "Coverage: French TikTok and Instagram videos from the last three months, from accounts with at least 5,000 followers \u2014 smaller accounts, where coded hate often starts, are not covered.", "A proof of concept, built in the week before the hackathon and run on real videos on the day."],
+      credits: "Data and resources: Oriane video search API; Multilingual HateCheck (CC BY 4.0); FTR and MLMA (MIT); HurtLex (CC BY-NC-SA 4.0; Bassignana, Basile & Patti, 2018).",
+      footer: "No personal data is published. Quotes stay in their original French.",
+      meta_gen: "Generated {d}", meta_model: "model: {m} (prompt {p})", meta_items: "{t} videos judged, {r} flagged as racist ({s} sure)",
+      meta_undated: "{u} undated (left out of the charts)", load_err: "Could not load data.json ({e}). The data has not been published yet.", empty: "No narratives to show yet."
+    },
+    fr: {
+      positioning: "Un analyseur vidéo explique une vidéo. Ce radar explique un récit \u2014 sur {n} vidéos et {w} semaines.",
+      define_h: "Ce que nous comptons comme raciste",
+      define_p: "Les contenus qui attaquent, rabaissent, stéréotypent ou excluent des personnes en raison de leur origine, de leur appartenance ethnique, de leur couleur de peau ou de leur religion en tant qu'identité. Ne sont pas comptés : les reportages sur le racisme, les réponses antiracistes, les opinions sur la politique d'immigration et la critique des idées d'une religion. La même règle s'applique quel que soit le bord politique ; nous suivons des récits, jamais des personnes ni des partis.",
+      review_line: "<b>{n}</b> autres alertes dont l'IA n'est pas sûre ne sont pas comptées ici : une personne les vérifie.",
+      few_trend: "Trop peu de vidéos pour parler de tendance", range_line: "{a} \u2192 {b} vidéos", review_short: "+{k} incertaines (à vérifier)",
+      weeks_left: "{k} semaine(s) récente(s) exclue(s) des tendances (pas encore entièrement indexées)",
+      amp_explain: "Amplifié = vu bien au-delà des abonnés des créateurs (recommandations ou partages).",
+      amp_badge: "Amplifié", amp_line: "\u00d7{x} vues par abonné",
+      off_explain: "Dit, pas écrit = la partie raciste est seulement dite ou montrée dans la vidéo, jamais dans la légende ni les hashtags \u2014 une recherche par légende ou hashtag ne la voit pas.",
+      off_line: "{p} dit, pas écrit",
+      open_video: "Voir la vidéo ↗", limits_links: "Les insultes sont masquées. Les liens vers les vidéos sont affichés pour relecture jusqu’au {t} (heure de Paris), puis retirés.", footer_links: "Les liens vers les vidéos sont affichés temporairement pour relecture. Les citations restent en français.",
+      ctx_h: "Le reste de la conversation (étiquettes de l’IA, insultes masquées)", ctx_sum: "{l} — {n} vidéos : voir des exemples", ctx_sum_1: "{l} — 1 vidéo : voir l’exemple",
+      tone: "Réactions — contre le racisme : {c} · reportage : {n} · raciste (IA sûre) : {r}",
+      off_total: "<b>{p}</b> de ces contenus racistes ne le disent qu'à l'oral ou à l'écran, jamais dans la légende ni les hashtags \u2014 invisibles pour la modération et la veille fondées sur les hashtags.",
+      title: "Radar des récits racistes", subtitle: "Preuve de concept pour les équipes réseaux sociaux et vérification des rédactions",
+      page_title: "Radar des récits racistes",
+      synthetic: "<b>Données synthétiques.</b> Les chiffres et textes de cette page sont fictifs et servent uniquement à la démonstration.",
+      funnel_h: "Ce que la recherche par mots-clés vous aurait montré",
+      lead: "La recherche par mots-clés trouve toutes les vidéos qui emploient les mots. Notre radar garde celles qui sont vraiment racistes \u2014 et montre quels récits racistes se diffusent, et jusqu'où.",
+      bar_main: "Tout ce que la recherche a renvoyé, jugé par le modèle",
+      items: "{n} contenus", items_1: "1 contenu", ofwhich: "{p} racistes",
+      keep: "Le radar ne garde que la partie rouge : <b>{n}</b> contenus ({p}) — le reste est du contre-discours, de l'information ou du hors-sujet.",
+      keep_1: "Le radar ne garde que la partie rouge : <b>1</b> contenu ({p}) — le reste est du contre-discours, de l'information ou du hors-sujet.",
+      cmp: "La recherche par mots-clés seule renvoie {n} contenus, dont seulement {p} sont racistes (IA sûre).",
+      l_racist: "Raciste", l_counter_speech: "Réponses antiracistes", l_news_reporting: "Reportages sur le racisme", l_irrelevant: "Hors sujet",
+      l_racist_sure: "Raciste (IA sûre)", l_racist_review: "Raciste ? (IA pas sûre \u2014 une personne vérifie)",
+      narr_h: "Récits, classés par progression", narr_sub: "Les récits en hausse d'abord, puis selon l'évolution des quatre dernières semaines. Seules les vidéos que l'IA juge racistes à coup sûr sont comptées.",
+      col_narr: "Récit", col_trend: "Contenus racistes par semaine", col_change: "Évolution, 4 sem.", col_reach: "Portée (vues)",
+      rising: "En hausse", new_: "nouveau", items_short: "{n} contenus racistes", items_short_1: "1 contenu raciste",
+      hist_h: "Volume hebdomadaire", ev_h: "Preuves (insultes masquées ; signalements de l'IA, pas encore vérifiés par une personne)", sub_h: "Sous-récits",
+      no_week: "Pas de vidéos datées pour ce récit.", no_ex: "Aucun exemple confirmé pour ce récit.",
+      chart_label: "Histogramme empilé hebdomadaire", wk_tip: "{d} : {r} racistes, {c} contre-discours, {n} info",
+      cl_item: "{n} vidéos — {t}", cl_rising: " (en hausse)",
+      week_of: "semaine du {d}", date_unknown: "date inconnue", at: "à {t}", views: "vues", conf: "confiance {p}",
+      why: "Raison du modèle (en anglais) : ", mrk_label: "Raciste",
+      method_h: "Méthode et limites", pipeline_h: "Comment ça marche",
+      steps: ["La recherche Oriane trouve des vidéos courtes selon ce qu'elles disent, affichent à l'écran et en légende", "Un modèle d'IA ouvert lit chaque vidéo, l'étiquette et dit à quel point il est sûr", "Les contenus racistes sont classés par récit", "Les tendances hebdomadaires signalent ce qui progresse", "Cette page : des preuves vérifiables"],
+      eval_h: "À quelle fréquence se trompe-t-il ?", eval_fpr: "Taux de faux positifs", eval_prec: "Précision", eval_rec: "Rappel",
+      in100: "{x} sur 100", fa_sure: "fausses alertes quand l'IA est sûre", fa_all: "{x} sur 100 en comptant toutes les alertes",
+      eval_tested: "Testé sur {n} publications inoffensives qui ont l'air risquées (réponses antiracistes, mentions neutres de groupes), annotées par des personnes.",
+      eval_tested_nn: "Testé sur des publications inoffensives qui ont l'air risquées (réponses antiracistes, mentions neutres de groupes), annotées par des personnes.",
+      hc_pending: "Vérification humaine sur de vraies vidéos : en attente. Une vérification à l'aveugle par des journalistes francophones, fixée à l'avance, est la prochaine étape.",
+      hc_main: "Vérifié par une personne qui n'a pas vu la réponse de l'IA : {y} alertes du radar sur {n} étaient racistes. Recherche par mots-clés : {ky} sur {kn}.",
+      hc_main_nk: "Vérifié par une personne qui n'a pas vu la réponse de l'IA : {y} alertes du radar sur {n} étaient racistes.",
+      hc_ci: "Intervalles à 95 % \u2014 radar {lo}\u2013{hi}", hc_ci_k: " ; mots-clés {lo}\u2013{hi}",
+      hc_review: "Parmi les alertes dont l'IA n'était pas sûre, {p} étaient racistes (vérifiées : {n}).",
+      hc_story: "Récit correct pour {p} des {n} vidéos vérifiées.",
+      eval_n_prec: "sur {n} cas de test synthétiques", eval_soon: "À venir — évaluation sur un échantillon vérifié à la main.",
+      eval_note: "Notes sur l'évaluation",
+      limits_h: "Limites",
+      limits: ["Des pistes, pas des verdicts : en rédaction, une personne vérifie chaque contenu avant publication. Les exemples de cette page sont des signalements de l'IA, pas encore vérifiés par une personne.", "L'outil suit des récits, jamais des personnes ni des partis.", "Les insultes sont masquées ; aucun pseudonyme, identifiant de vidéo ou lien n'apparaît ici.", "Pas encore couverts : l'antisémitisme (il demande sa propre liste de recherche d'experts et son propre jeu de test \u2014 premier point de notre feuille de route) et la haine fondée sur le genre, la sexualité ou le handicap.", "Couverture : vidéos TikTok et Instagram en français des trois derniers mois, issues de comptes d'au moins 5 000 abonnés \u2014 les petits comptes, où la haine codée naît souvent, ne sont pas couverts.", "Une preuve de concept, construite la semaine précédant le hackathon et lancée sur de vraies vidéos le jour même."],
+      credits: "Données et ressources : API de recherche vidéo Oriane ; Multilingual HateCheck (CC BY 4.0) ; FTR et MLMA (MIT) ; HurtLex (CC BY-NC-SA 4.0 ; Bassignana, Basile & Patti, 2018).",
+      footer: "Aucune donnée personnelle n'est publiée. Les citations restent dans leur français d'origine.",
+      meta_gen: "Généré le {d}", meta_model: "modèle : {m} (prompt {p})", meta_items: "{t} vidéos jugées, dont {r} signalées racistes ({s} sûres)",
+      meta_undated: "{u} sans date (exclues des courbes)", load_err: "Impossible de charger data.json ({e}). Les données n'ont pas encore été publiées.", empty: "Aucun récit à afficher pour le moment."
+    }
+  };
+  var LABELS = ["racist", "counter_speech", "news_reporting", "irrelevant"];
+  var FUNNEL = ["racist_sure", "racist_review", "counter_speech", "news_reporting", "irrelevant"];
+  var COLOURS = { racist: "--c-racist", racist_sure: "--c-racist", racist_review: "--c-review", counter_speech: "--c-counter", news_reporting: "--c-news", irrelevant: "--c-irrelevant" };
+  var NS = "http://www.w3.org/2000/svg";
+  var lang = "en", data = null, selected = null;
+
+  function t(key, vars) {
+    var s = (I18N[lang] && I18N[lang][key] != null) ? I18N[lang][key] : I18N.en[key];
+    if (typeof s !== "string") return s;
+    Object.keys(vars || {}).forEach(function (k) { s = s.split("{" + k + "}").join(vars[k]); });
+    return s;
+  }
+  // Singular wording when n is exactly 1 and a "<key>_1" string exists.
+  function tn(key, n, vars) { return t(n === 1 && I18N.en[key + "_1"] != null ? key + "_1" : key, vars); }
+  function locale() { return lang === "fr" ? "fr-FR" : "en-GB"; }
+  function num(n, digits) { return new Intl.NumberFormat(locale(), { maximumFractionDigits: digits || 0 }).format(n); }
+  function pct(x, digits) { return num(x, digits == null ? 1 : digits) + (lang === "fr" ? " %" : "%"); }
+  function compact(v) {
+    if (v >= 1e6) return num(v / 1e6, 1) + " M";
+    if (v >= 1e3) return num(v / 1e3, v >= 1e5 ? 0 : 1) + " k";
+    return num(v);
+  }
+  function el(tag, props, children) {
+    var e = document.createElement(tag);
+    Object.keys(props || {}).forEach(function (k) {
+      if (k === "text") e.textContent = props[k]; else e.setAttribute(k, props[k]);
+    });
+    (children || []).forEach(function (c) { e.appendChild(c); });
+    return e;
+  }
+  function svg(tag, attrs, parent, text) {
+    var e = document.createElementNS(NS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function fmtDate(iso) {
+    var d = new Date(iso + "T00:00:00");
+    return isNaN(d) ? iso : d.toLocaleDateString(locale(), { day: "numeric", month: "short" });
+  }
+  // Bold markers in our own dictionary strings only (never data): <b>..</b> -> element nodes
+  function richInto(node, html) {
+    clear(node);
+    html.split(/(<b>.*?<\/b>)/).forEach(function (part) {
+      var m = part.match(/^<b>(.*)<\/b>$/);
+      if (m) node.appendChild(el("b", { text: m[1] })); else if (part) node.appendChild(document.createTextNode(part));
+    });
+  }
+  function nname(n) { return (lang === "fr" ? n.name_fr : n.name) || n.name || n.narrative_id; }
+  function ndesc(n) { return (lang === "fr" ? n.description_fr : n.description_en) || n.description_en || ""; }
+
+  /* ---------- funnel ---------- */
+  // Older data.json files have no tiers: all racist items count as sure.
+  function tiers(c) {
+    var out = {};
+    FUNNEL.forEach(function (l) { out[l] = c[l] || 0; });
+    if (c.racist_sure == null && c.racist_review == null) { out.racist_sure = c.racist || 0; out.racist_review = 0; }
+    return out;
+  }
+  function barBlock(caption, c0, total, small) {
+    var c = tiers(c0);
+    var wrap = el("div", { "class": "fbar" });
+    var racistShare = total ? c.racist_sure / total * 100 : 0;
+    wrap.appendChild(el("div", { "class": "cap" }, [
+      el("span", { text: caption }),
+      el("span", { "class": "n", text: tn("items", total, { n: num(total) }) + " · " + t("ofwhich", { p: pct(racistShare) }) })
+    ]));
+    var bar = el("div", { "class": "bar" + (small ? " small" : ""), role: "img",
+      "aria-label": FUNNEL.map(function (l) { return t("l_" + l) + " " + num(c[l]) + " (" + pct(total ? c[l] / total * 100 : 0) + ")"; }).join(", ") });
+    FUNNEL.forEach(function (l) {
+      if (!c[l]) return;
+      var share = c[l] / total * 100;
+      var sp = el("span", { "class": "s-" + l });
+      if (share >= 7) sp.appendChild(l === "racist_review" ? el("b", { text: pct(share, 0) }) : document.createTextNode(pct(share, 0)));
+      sp.style.width = share + "%";
+      bar.appendChild(sp);
+    });
+    wrap.appendChild(bar);
+    return wrap;
+  }
+  function renderFunnel() {
+    var box = document.getElementById("funnel");
+    clear(box);
+    var tot = data.totals || {};
+    if (!tot.total) { box.appendChild(el("p", { "class": "pending", text: t("empty") })); return; }
+    var c = tiers(tot);
+    box.appendChild(barBlock(t("bar_main"), tot, tot.total, false));
+    var legend = el("div", { "class": "legend" });
+    FUNNEL.forEach(function (l) {
+      var sw = l === "racist_review" ? el("i", { "class": "hatch" }) : el("i", { style: "background:var(" + COLOURS[l] + ")" });
+      var k = el("div", { "class": "k" }, [sw, el("span", { text: t("l_" + l) })]);
+      var v = el("div", { "class": "v", text: num(c[l]) });
+      v.appendChild(el("small", { text: " " + pct(c[l] / tot.total * 100) }));
+      legend.appendChild(el("div", {}, [k, v]));
+    });
+    box.appendChild(legend);
+    var keep = el("div", { "class": "keep" });
+    richInto(keep, tn("keep", c.racist_sure, { n: num(c.racist_sure), p: pct(c.racist_sure / tot.total * 100) }));
+    box.appendChild(keep);
+    if (c.racist_review) {
+      var rv = el("p", { "class": "bar-note" });
+      richInto(rv, t("review_line", { n: num(c.racist_review) }));
+      box.appendChild(rv);
+    }
+    var oc = data.off_caption;
+    if (oc && oc.n && oc.share != null) {
+      var off = el("div", { "class": "keep" });
+      richInto(off, t("off_total", { p: pct(oc.share * 100, 0) }));
+      box.appendChild(off);
+    }
+    var b = data.baseline;
+    if (b && b.total) {
+      box.appendChild(el("div", { style: "height:22px" }));
+      box.appendChild(barBlock(b.label, b, b.total, true));
+      box.appendChild(el("p", { "class": "meta", text: t("cmp", { n: num(b.total), p: pct(tiers(b).racist_sure / b.total * 100) }) }));
+    }
+  }
+
+  /* ---------- narratives ---------- */
+  function last4(n) { return n.weekly.slice(-4).reduce(function (a, w) { return a + w.racist; }, 0); }
+  function sparkline(weekly) {
+    var W = 150, H = 36, pad = 4;
+    var s = svg("svg", { viewBox: "0 0 " + W + " " + H, "class": "spark", "aria-hidden": "true", focusable: "false" });
+    if (weekly.length < 2) return s;
+    var vals = weekly.map(function (w) { return w.racist; });
+    var max = Math.max.apply(null, vals) || 1;
+    var pts = vals.map(function (v, i) {
+      return [pad + i * (W - 2 * pad) / (vals.length - 1), H - pad - v / max * (H - 2 * pad)];
+    });
+    svg("line", { x1: pad, x2: W - pad, y1: H - pad, y2: H - pad, stroke: "var(--line)", "stroke-width": 1 }, s);
+    svg("polyline", { points: pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "),
+      fill: "none", stroke: "var(--c-racist)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, s);
+    var lp = pts[pts.length - 1];
+    svg("circle", { cx: lp[0], cy: lp[1], r: 3, fill: "var(--c-racist)" }, s);
+    return s;
+  }
+  function changeCell(n) {
+    var cell = el("div", { "class": "num r" + (n.rising ? " up" : "") });
+    if (n.change_pct == null && n.too_few) {
+      cell.className = "num r few";
+      cell.textContent = t("few_trend");
+      return cell;
+    }
+    var txt;
+    if (n.change_pct == null) txt = last4(n) > 0 ? t("new_") : "—";
+    else txt = (n.change_pct > 0 ? "+" : n.change_pct < 0 ? "−" : "") + pct(Math.abs(n.change_pct), 0);
+    cell.appendChild(document.createTextNode(txt));
+    if (n.prev_count != null && n.last_count != null) cell.appendChild(el("small", { text: t("range_line", { a: num(n.prev_count), b: num(n.last_count) }) }));
+    return cell;
+  }
+  function renderNarratives() {
+    var ul = document.getElementById("nlist");
+    clear(ul);
+    data.narratives.forEach(function (n, i) {
+      var open = n.narrative_id === selected;
+      var did = "detail-" + i;
+      var nm = el("div", { "class": "nmc" }, [el("div", { "class": "nm" }, [document.createTextNode(nname(n))])]);
+      if (n.rising) nm.firstChild.appendChild(el("span", { "class": "badge", text: t("rising") }));
+      if (n.amplified) nm.firstChild.appendChild(el("span", { "class": "badge amp", title: t("amp_explain"), text: t("amp_badge") }));
+      var sm = tn("items_short", n.totals.racist, { n: num(n.totals.racist) });
+      if (n.n_review) sm += " \u00b7 " + t("review_short", { k: num(n.n_review) });
+      if (n.amplification != null) sm += " \u00b7 " + t("amp_line", { x: num(n.amplification, 1) });
+      if (n.off_caption && n.off_caption.n && n.off_caption.share != null) sm += " \u00b7 " + t("off_line", { p: pct(n.off_caption.share * 100, 0) });
+      nm.firstChild.appendChild(el("small", { text: sm }));
+      var tc = n.totals || {};
+      if (n.narrative_id !== "other" && (tc.counter_speech || 0) + (tc.news_reporting || 0) + (tc.racist || 0) > 0)
+        nm.firstChild.appendChild(el("small", { "class": "tone", text: t("tone", { c: num(tc.counter_speech || 0), n: num(tc.news_reporting || 0), r: num(tc.racist || 0) }) }));
+      var ch = changeCell(n);
+      var reach = el("div", { "class": "num r", text: compact(n.reach || 0) });
+      var btn = el("button", { type: "button", "class": "row", "aria-expanded": String(open), "aria-controls": did }, [
+        nm, el("div", {}, [sparkline(n.weekly)]), ch, reach]);
+      btn.addEventListener("click", function () { selected = open ? null : n.narrative_id; renderNarratives(); });
+      var li = el("li", { id: "n-" + n.narrative_id }, [btn]);
+      var det = el("div", { id: did, "class": "detail" });
+      if (open) { renderDetail(det, n); } else { det.hidden = true; }
+      li.appendChild(det);
+      ul.appendChild(li);
+    });
+  }
+
+  function chartSvg(weekly) {
+    var W = 640, H = 220, m = { l: 34, r: 8, t: 8, b: 28 };
+    var s = svg("svg", { viewBox: "0 0 " + W + " " + H, "class": "chart", role: "img", "aria-label": t("chart_label") });
+    var order = ["racist", "counter_speech", "news_reporting"];
+    var totals = weekly.map(function (w) { return w.racist + w.counter_speech + w.news_reporting; });
+    var max = Math.max(4, Math.max.apply(null, totals));
+    var step = max <= 8 ? 2 : max <= 20 ? 5 : Math.ceil(max / 4 / 10) * 10;
+    var top = Math.ceil(max / step) * step, iw = W - m.l - m.r, ih = H - m.t - m.b;
+    for (var v = 0; v <= top; v += step) {
+      var y = m.t + ih - (v / top) * ih;
+      svg("line", { x1: m.l, x2: W - m.r, y1: y, y2: y, "class": "axis", "stroke-width": v === 0 ? 1.2 : 0.5 }, s);
+      svg("text", { x: m.l - 6, y: y + 4, "text-anchor": "end" }, s, String(v));
+    }
+    var bw = iw / Math.max(weekly.length, 1);
+    weekly.forEach(function (w, i) {
+      var x = m.l + i * bw + bw * 0.12, width = bw * 0.76, base = m.t + ih;
+      var g = svg("g", {}, s);
+      svg("title", {}, g, t("wk_tip", { d: fmtDate(w.week), r: w.racist, c: w.counter_speech, n: w.news_reporting }));
+      order.forEach(function (l) {
+        var h = (w[l] / top) * ih;
+        if (h <= 0) return;
+        base -= h;
+        svg("rect", { x: x, y: base, width: width, height: h, fill: "var(" + COLOURS[l] + ")" }, g);
+      });
+      if (weekly.length <= 14 || i % 2 === 0) svg("text", { x: x + width / 2, y: H - 9, "text-anchor": "middle" }, s, fmtDate(w.week));
+    });
+    return s;
+  }
+  function highlighted(excerpt, span) {
+    var q = el("p", { "class": "q", lang: "fr" });
+    var at = span ? excerpt.indexOf(span) : -1;
+    if (at < 0) { q.textContent = excerpt; return q; }
+    q.appendChild(document.createTextNode(excerpt.slice(0, at)));
+    q.appendChild(el("mark", { text: span }));
+    q.appendChild(document.createTextNode(excerpt.slice(at + span.length)));
+    return q;
+  }
+  function linksOn() { return !!(data && data.links_until && Date.now() < Date.parse(data.links_until)); }  // temporary, self-expiring
+  function linksTime() { try { return new Date(data.links_until).toLocaleString(lang === "fr" ? "fr-FR" : "en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Europe/Paris" }); } catch (e) { return data.links_until; } }
+  function card(ex) {
+    var tag = el("div", { "class": "tag" }, [el("span", { "class": "lab", style: "background:var(" + (COLOURS[ex.label] || "--c-racist") + ")", text: t("l_" + ex.label) })]);
+    var bits = [ex.platform, ex.week ? t("week_of", { d: fmtDate(ex.week) }) : t("date_unknown")];
+    if (ex.views_band) bits.push(ex.views_band + " " + t("views"));
+    bits.forEach(function (b) { tag.appendChild(el("span", { text: b })); });
+    if (ex.timestamp) tag.appendChild(el("span", { "class": "ts", text: "▶ " + t("at", { t: ex.timestamp }) }));
+    var c = el("div", { "class": "card" }, [tag, highlighted(ex.excerpt, ex.evidence_span_masked)]);
+    if (ex.rationale) c.appendChild(el("div", { "class": "why", text: t("why") + ex.rationale }));
+    if (linksOn() && ex.url && /^https:\/\/(www\.)?(tiktok\.com|instagram\.com)\//.test(ex.url))
+      c.appendChild(el("a", { href: ex.url, target: "_blank", rel: "noopener noreferrer", referrerpolicy: "no-referrer", "class": "vlink", text: t("open_video") }));
+    return c;
+  }
+  function renderDetail(box, n) {
+    var d = ndesc(n);
+    if (d) box.appendChild(el("p", { "class": "desc", text: d }));
+    box.appendChild(el("h3", { text: t("hist_h") }));
+    var key = el("div", { "class": "keyl" });
+    ["racist", "counter_speech", "news_reporting"].forEach(function (l) {
+      key.appendChild(el("span", {}, [el("i", { style: "background:var(" + COLOURS[l] + ")" }), document.createTextNode(t("l_" + l))]));
+    });
+    box.appendChild(key);
+    if (n.weekly.length) box.appendChild(chartSvg(n.weekly));
+    else box.appendChild(el("p", { "class": "pending", text: t("no_week") }));
+    box.appendChild(el("h3", { text: t("ev_h") }));
+    var cards = el("div", { "class": "cards" });
+    if (!n.examples.length) cards.appendChild(el("p", { "class": "pending", text: t("no_ex") }));
+    n.examples.forEach(function (ex) { cards.appendChild(card(ex)); });
+    box.appendChild(cards);
+    var ctx = n.context_examples || {}, ctxLabels = ["counter_speech", "news_reporting"].filter(function (l) { return (ctx[l] || []).length; });
+    if (ctxLabels.length) box.appendChild(el("h3", { text: t("ctx_h") }));
+    ctxLabels.forEach(function (l) {
+      var total = (n.totals && n.totals[l]) || ctx[l].length;
+      var det = el("details", { "class": "ctx" }, [el("summary", { text: tn("ctx_sum", total, { l: t("l_" + l), n: num(total) }) })]);
+      var cc = el("div", { "class": "cards" });
+      ctx[l].forEach(function (ex) { cc.appendChild(card(ex)); });
+      det.appendChild(cc);
+      box.appendChild(det);
+    });
+  }
+
+  /* ---------- method ---------- */
+  function renderMethod() {
+    var steps = document.getElementById("steps");
+    clear(steps);
+    t("steps").forEach(function (s) { steps.appendChild(el("li", { text: s })); });
+    var lim = document.getElementById("limits");
+    clear(lim);
+    var lims = t("limits").slice();
+    if (linksOn()) lims[2] = t("limits_links", { t: linksTime() });
+    lims.forEach(function (s) { lim.appendChild(el("li", { text: s })); });
+    var box = document.getElementById("eval");
+    clear(box);
+    var ev = data.eval;
+    if (!ev || (ev.fpr == null && ev.precision == null)) {
+      box.appendChild(el("p", { "class": "pending", text: t("eval_soon") }));
+      return;
+    }
+    var row = el("div", { "class": "eval" });
+    var x100 = function (v) { return t("in100", { x: num(v * 100, 1) }); };
+    if (ev.fpr_sure != null) {
+      row.appendChild(el("div", {}, [el("div", { "class": "big", text: x100(ev.fpr_sure) }), el("div", { "class": "lab", text: t("fa_sure") })]));
+      if (ev.fpr != null) row.appendChild(el("div", {}, [el("div", { "class": "lab", style: "font-size:1rem;max-width:none;align-self:flex-end", text: t("fa_all", { x: num(ev.fpr * 100, 1) }) })]));
+    } else if (ev.fpr != null) {
+      row.appendChild(el("div", {}, [el("div", { "class": "big", text: x100(ev.fpr) }), el("div", { "class": "lab", text: t("fa_all", { x: num(ev.fpr * 100, 1) }) })]));
+    }
+    [["precision", "eval_prec", ev.n_precision, "eval_n_prec"], ["recall", "eval_rec", ev.n_precision, "eval_n_prec"]].forEach(function (k) {
+      if (ev[k[0]] == null) return;
+      var lab = t(k[1]) + (k[2] != null ? " — " + t(k[3], { n: num(k[2]) }) : "");
+      row.appendChild(el("div", {}, [el("div", { "class": "big", text: pct(ev[k[0]] * 100) }), el("div", { "class": "lab", text: lab })]));
+    });
+    box.appendChild(row);
+    if (ev.fpr != null || ev.fpr_sure != null) {
+      box.appendChild(el("p", { "class": "evtext", text: ev.n_benign != null ? t("eval_tested", { n: num(ev.n_benign) }) : t("eval_tested_nn") }));
+    }
+    renderHandcheck(box);
+    if (ev.note) {
+      var det = el("details", {}, [el("summary", { text: t("eval_note") }), el("p", { text: ev.note })]);
+      box.appendChild(det);
+    }
+  }
+  function renderHandcheck(box) {
+    var hc = data.handcheck;
+    var wrap = el("div", { "class": "hc" });
+    if (!hc || hc.radar_precision == null || !hc.n_radar) {
+      wrap.appendChild(el("p", { "class": "pending", text: t("hc_pending"), style: "margin:0" }));
+      box.appendChild(wrap);
+      return;
+    }
+    var yes = function (p, n) { return num(Math.round(p * n)); };
+    var lo = function (ci) { return pct(ci[0] * 100, 0).replace(/ ?%$/, ""); };
+    var hi = function (ci) { return pct(ci[1] * 100, 0); };
+    var vars = { y: yes(hc.radar_precision, hc.n_radar), n: num(hc.n_radar) };
+    var haveK = hc.keyword_precision != null && hc.n_keyword;
+    if (haveK) { vars.ky = yes(hc.keyword_precision, hc.n_keyword); vars.kn = num(hc.n_keyword); }
+    var main = el("div", { text: t(haveK ? "hc_main" : "hc_main_nk", vars) });
+    var ciTxt = "";
+    if (hc.radar_ci) ciTxt = t("hc_ci", { lo: lo(hc.radar_ci), hi: hi(hc.radar_ci) });
+    if (hc.radar_ci && haveK && hc.keyword_ci) ciTxt += t("hc_ci_k", { lo: lo(hc.keyword_ci), hi: hi(hc.keyword_ci) });
+    if (ciTxt) main.appendChild(el("small", { text: ciTxt }));
+    wrap.appendChild(main);
+    if (hc.review_racist_share != null && hc.n_review) wrap.appendChild(el("small", { text: t("hc_review", { p: pct(hc.review_racist_share * 100, 0), n: num(hc.n_review) }) }));
+    if (hc.storyline_accuracy != null && hc.n_storyline) wrap.appendChild(el("small", { text: t("hc_story", { p: pct(hc.storyline_accuracy * 100, 0), n: num(hc.n_storyline) }) }));
+    box.appendChild(wrap);
+  }
+
+  function weeksCovered() {
+    if (data.weeks && data.weeks.n != null) return data.weeks.n;
+    return data.narratives.reduce(function (m, n) { return Math.max(m, n.weekly.length); }, 0);
+  }
+  function renderMeta() {
+    document.getElementById("positioning").textContent = t("positioning", { n: num((data.totals || {}).total || 0), w: num(weeksCovered()) });
+    var syn = document.getElementById("synthetic");
+    syn.hidden = !data.synthetic;
+    richInto(syn, t("synthetic"));
+    var tt = data.totals || {};
+    var parts = [t("meta_gen", { d: (data.generated_at || "?").replace("T", " ").slice(0, 16) }),
+      t("meta_model", { m: data.model || "?", p: data.prompt_version || "?" }),
+      t("meta_items", { t: num(tt.total || 0), r: num(tt.racist || 0), s: num(tt.racist_sure != null ? tt.racist_sure : (tt.racist || 0)) })];
+    if (data.weeks && data.weeks.left_out) parts.push(t("weeks_left", { k: data.weeks.left_out }));
+    if (data.undated) parts.push(t("meta_undated", { u: data.undated }));
+    document.getElementById("meta").textContent = parts.join(" · ");
+  }
+
+  function renderStatic() {
+    document.documentElement.lang = lang;
+    document.title = t("page_title");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"), function (e) {
+      var v = t(e.getAttribute("data-i18n"));
+      if (typeof v === "string") e.textContent = v;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-lang]"), function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang));
+    });
+    document.getElementById("credits").textContent = t("credits");
+  }
+  /* ---------- brief (7 Nov) ---------- */
+  function renderBrief() {
+    var box = document.getElementById("brief");
+    clear(box);
+    var b = data.brief && data.brief[lang];
+    if (!b || !b.findings || !b.findings.length) { box.hidden = true; return; }
+    box.hidden = false;
+    box.appendChild(el("p", { "class": "kicker", id: "h-brief", text: b.title + " · " + b.date }));
+    box.appendChild(el("p", { "class": "brief-sub", text: b.subtitle }));
+    var ol = el("ol", { "class": "findings" });
+    b.findings.forEach(function (f) {
+      var li = el("li", {}, [el("span", { "class": "stat", text: f.stat }), el("span", { "class": "ftext", text: f.text })]);
+      if (f.narrative_id) {
+        var a = el("a", { href: "#" + f.narrative_id, "class": "go", text: b.cta + " →" });
+        a.addEventListener("click", function () { setTimeout(openFromHash, 0); });
+        li.appendChild(a);
+      }
+      ol.appendChild(li);
+    });
+    box.appendChild(ol);
+    box.appendChild(el("p", { "class": "rising", text: b.rising }));
+    box.appendChild(el("p", { "class": "brief-foot", text: b.footer }));
+  }
+  function openFromHash() {
+    if (!data) return;
+    var id = decodeURIComponent((location.hash || "").slice(1));
+    if (!data.narratives.some(function (n) { return n.narrative_id === id; })) return;
+    selected = id;
+    renderNarratives();
+    var row = document.getElementById("n-" + id);
+    var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (row) row.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+  }
+  window.addEventListener("hashchange", openFromHash);
+  function render() {
+    renderStatic();
+    if (!data) return;
+    if (linksOn()) { var fe = document.querySelector('[data-i18n="footer"]'); if (fe) fe.textContent = t("footer_links"); }
+    renderMeta(); renderBrief(); renderFunnel(); renderNarratives(); renderMethod();
+  }
+
+  function initLang() {
+    var q = null, stored = null;
+    try { q = new URLSearchParams(location.search).get("lang"); } catch (e) { /* ignore */ }
+    try { stored = localStorage.getItem("htf-lang"); } catch (e) { /* storage unavailable */ }
+    lang = [q, stored].filter(function (x) { return x === "fr" || x === "en"; })[0] || "en";
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-lang]"), function (b) {
+    b.addEventListener("click", function () {
+      lang = b.getAttribute("data-lang");
+      try { localStorage.setItem("htf-lang", lang); } catch (e) { /* ignore */ }
+      render();
+    });
+  });
+
+  initLang();
+  renderStatic();
+  fetch("data.json", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then(function (d) {
+      if (!d || !Array.isArray(d.narratives)) throw new Error("format");
+      data = d;
+      if (!data.narratives.length) { var er = document.getElementById("error"); er.textContent = t("empty"); er.hidden = false; renderMeta(); return; }
+      selected = data.narratives[0].narrative_id;
+      document.getElementById("main").hidden = false;
+      render();
+      if (location.hash) openFromHash();
+    })
+    .catch(function (e) {
+      var box = document.getElementById("error");
+      box.textContent = t("load_err", { e: e.message });
+      box.hidden = false;
+    });
+})();
+</script>
+</body>
+</html>

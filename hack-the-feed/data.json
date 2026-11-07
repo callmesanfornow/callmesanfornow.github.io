@@ -1,0 +1,1964 @@
+{
+  "generated_at": "2026-11-07T12:50:58+00:00",
+  "model": "openrouter/qwen3.8-27b@deepinfra-bf16",
+  "prompt_version": "v1",
+  "synthetic": false,
+  "totals": {
+    "racist": 74,
+    "counter_speech": 263,
+    "news_reporting": 80,
+    "irrelevant": 1617,
+    "racist_sure": 31,
+    "racist_review": 43,
+    "total": 2034
+  },
+  "tiers": {
+    "threshold": 0.9,
+    "sure": 31,
+    "review": 43
+  },
+  "undated": 0,
+  "weeks": {
+    "n": 12,
+    "first": "2026-08-03",
+    "last": "2026-10-19",
+    "left_out": 1,
+    "cutoff": "2026-10-31"
+  },
+  "off_caption": {
+    "share": 0.917,
+    "n": 24,
+    "video": 22
+  },
+  "storyline_check": true,
+  "narratives": [
+    {
+      "narrative_id": "N07_islamisation",
+      "name": "Islamisation of France",
+      "name_fr": "« Islamisation » de la France",
+      "description_en": "The claim that Islam and Muslims are taking over French public life and identity.",
+      "description_fr": "L'idée que l'islam et les musulmans s'empareraient de la vie publique et de l'identité françaises.",
+      "totals": {
+        "racist": 10,
+        "counter_speech": 19,
+        "news_reporting": 4
+      },
+      "n_review": 7,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 1,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 7317
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 2,
+          "counter_speech": 4,
+          "news_reporting": 0,
+          "views": 5463
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 1,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 11696
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 1,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 66962
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 1,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 36294
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 2,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 1,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 330100
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 3,
+          "counter_speech": 5,
+          "news_reporting": 0,
+          "views": 298594
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 5,
+      "last_count": 4,
+      "too_few": true,
+      "reach": 756426,
+      "amplification": 0.19,
+      "amplified": false,
+      "off_caption": {
+        "share": 1.0,
+        "n": 8,
+        "video": 8
+      },
+      "examples": [
+        {
+          "excerpt": "les gars on peut plus faire ces blagues là. Déjà qu'on passe pour des racistes. Non mais on est pas racistes, on préfère les blancs, c'est tout. C'est précisément la définition même. Du... bref. Ben ça va, on dédramatise. C'est pas vous qui êtes sur le terrain. En plus, ils",
+          "evidence_span_masked": "on est pas racistes, on préfère les blancs, c'est tout. C'est précisément la définition même.",
+          "timestamp": "1:50",
+          "rationale": "The speaker explicitly states a preference for white people over others, which is a direct expression of racial prejudice and discrimination.",
+          "views_band": "100k–1M",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "tiktok",
+          "week": "2026-10-05",
+          "url": "https://www.tiktok.com/@franjoreno/video/7694265798424120598"
+        },
+        {
+          "excerpt": "l'immigration arabo-musulmane depuis 30 ans... Qu'est-ce que vous avez contre les Arabes ? Le problème de la France, ce sont les Arabes en fait. Le problème de la France, c'est l'islamisation de notre pays, oui monsieur. Donc en France, on est en train de devenir un pays",
+          "evidence_span_masked": "Le problème de la France, ce sont les Arabes en fait. Le problème de la France, c'est l'islamisation de notre pays, oui monsieur.",
+          "timestamp": "0:34",
+          "rationale": "The content features a speaker explicitly blaming Arabs and Islam for France's problems, promoting a replacement theory narrative and expressing hostility toward these groups.",
+          "views_band": "100k–1M",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "instagram",
+          "week": "2026-10-19",
+          "url": "https://www.instagram.com/p/DewcnvLjsY7/"
+        },
+        {
+          "excerpt": "Je crois que ce que nous avons vu hier, c'est le véritable visage du grand emplacement. des hordes de b*** maghrébins et africains qui rentrent dans les villes, des drapeaux, le drapeau palestinien, le drapeau algérien, voire marocain. Mais c'est raciste. En revanche,",
+          "evidence_span_masked": "des hordes de b*** maghrébins et africains qui rentrent dans les villes",
+          "timestamp": "2:14",
+          "rationale": "The speaker explicitly dehumanizes a group of people based on their origin and religion, describing them as 'hordes of barbarians' and claiming they have taken over French cities, which constitutes racist hate speech.",
+          "views_band": "100k–1M",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "instagram",
+          "week": "2026-10-19",
+          "url": "https://www.instagram.com/p/De45cjaMre2/"
+        }
+      ],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "suis contre eux. À un moment donné, réfléchissez. Genre, vraiment, ça devient terrifiant. Le racisme et l'islamophobie ne se cachent même plus. Genre, vraiment, vous trouvez n'importe quelle situation pour essayer de retourner les gens. Pourquoi tu les défends ? Ils sont",
+            "evidence_span_masked": "Le racisme et l'islamophobie ne se cachent même plus.",
+            "timestamp": "0:46",
+            "rationale": "The speaker explicitly denounces racism and Islamophobia while refuting hateful generalizations about veiled Muslim women.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-08-31",
+            "url": "https://www.tiktok.com/@richaard2609/video/7682088223786536224"
+          },
+          {
+            "excerpt": "Je pense qu'on devrait réhabiliter la peine de mort pour les fumeurs de Chine. C'est une drogue d'arabe, donc qui participe à l'islamisation de la France, ces gens-là. C'est vrai que la drogue, c'est un vrai problème de santé publique, et c'est important de prendre soin de ces",
+            "evidence_span_masked": "pov : cnews quand qql fume du shit vs quand un terroriste d’extrême droite blanc fume du shit",
+            "timestamp": null,
+            "rationale": "The video satirizes and denounces the racist double standard in media coverage of drug use by different ethnic groups.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-10-19",
+            "url": "https://www.instagram.com/p/De6knd5IySP/"
+          }
+        ],
+        "news_reporting": [
+          {
+            "excerpt": "va finir par exploser. Dans les années 60, une série de coups d'état embrase le Nigeria et de nombreux massacres visent les Igbo, vivant dans le nord, qui périssent par milliers. Terrorisés, nombreux d'entre eux fuient alors vers leur région d'origine, le sud-est, avec un",
+            "evidence_span_masked": "de nombreux massacres visent les Igbo, vivant dans le nord, qui périssent par milliers",
+            "timestamp": "0:39",
+            "rationale": "The video provides a historical and factual account of the Nigerian Civil War and the persecution of the Igbo people, reporting on ethnic tensions and events without promoting hate or expressing a personal racist opinion.",
+            "views_band": "100k–1M",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-09-28",
+            "url": "https://www.tiktok.com/@maxbellona/video/7692094054342937888"
+          },
+          {
+            "excerpt": "volonté de viser des Noirs et des Arabes pour venger les commerçants pillés le 17 octobre. Le climat politique se radicalise et a tendance à favoriser la propagation d'une parole raciste. Par exemple, en banalisant le fantasme complotiste de grand remplacement des populations",
+            "evidence_span_masked": "Le climat politique se radicalise et a tendance à favoriser la propagation d'une parole raciste.",
+            "timestamp": "1:35",
+            "rationale": "The video is a political editorial from a news outlet analyzing the context of a racist attack and citing various political statements to discuss the climate of opinion, rather than promoting racism itself.",
+            "views_band": "10k–100k",
+            "label": "news_reporting",
+            "confidence": 0.9,
+            "platform": "tiktok",
+            "week": "2026-10-26",
+            "url": "https://www.tiktok.com/@franceinfo/video/7700967278111657238"
+          }
+        ]
+      }
+    },
+    {
+      "narrative_id": "N02_replacement",
+      "name": "Demographic replacement conspiracy",
+      "name_fr": "Théorie du complot du « remplacement » démographique",
+      "description_en": "The claim that the French population is being deliberately replaced by immigrants.",
+      "description_fr": "L'idée que la population française serait délibérément remplacée par des immigrés.",
+      "totals": {
+        "racist": 8,
+        "counter_speech": 115,
+        "news_reporting": 30
+      },
+      "n_review": 6,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 9,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 1,
+          "counter_speech": 13,
+          "news_reporting": 13,
+          "views": 635910
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 3,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 12,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 6,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 4,
+          "counter_speech": 3,
+          "news_reporting": 2,
+          "views": 1365611
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 3,
+          "counter_speech": 46,
+          "news_reporting": 2,
+          "views": 152299
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 1,
+      "last_count": 7,
+      "too_few": true,
+      "reach": 2153820,
+      "amplification": 0.43,
+      "amplified": false,
+      "off_caption": {
+        "share": 0.75,
+        "n": 8,
+        "video": 6
+      },
+      "examples": [
+        {
+          "excerpt": "autant vous dire que ce sera le grand enjeu pour la France dans les 50 années à venir, faire en sorte que les Français restent majoritaires chez eux et que donc la France reste la France. Je vous invite donc à lire ce numéro et à vous procurer l'étude qui paraîtra lundi",
+          "evidence_span_masked": "faire en sorte que les Français restent majoritaires chez eux et que donc la France reste la France",
+          "timestamp": "2:04",
+          "rationale": "Promotes a 'great replacement' narrative and calls for exclusion to maintain ethnic majority.",
+          "views_band": "100k–1M",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "instagram",
+          "week": "2026-09-14",
+          "url": "https://www.instagram.com/p/DdcBC83CjBY/"
+        },
+        {
+          "excerpt": "nous avons vu hier, c'est le véritable visage du grand remplacement. Il a une apparence des hordes de b*** maghrébins et africains qui rentrent dans les villes. Il a des drapeaux, le drapeau palestinien, le drapeau algérien, voire marocain. Il a des alliés, les milices",
+          "evidence_span_masked": "hordes de b*** maghrébins et africains",
+          "timestamp": "0:05",
+          "rationale": "Promotes the 'great replacement' theory and dehumanizes North African and African people as 'barbarian hordes'.",
+          "views_band": "100k–1M",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "instagram",
+          "week": "2026-10-12",
+          "url": "https://www.instagram.com/p/DepZ504uwYx/"
+        },
+        {
+          "excerpt": "Ce qui est le plus grave à mon avis, c'est le grand remplacement démographique, parce que ça c'est irréversible. L'autorité de l'État, ça peut se rétablir. Il y a beaucoup de choses qui peuvent se rétablir. Les finances, ça peut se rétablir. L'autorité de l'État, ça peut se",
+          "evidence_span_masked": "Ce qui est le plus grave à mon avis, c'est le grand remplacement démographique",
+          "timestamp": "0:00",
+          "rationale": "Promotes the 'great replacement' conspiracy theory and links immigration to negative demographic changes.",
+          "views_band": "10k–100k",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "instagram",
+          "week": "2026-10-12",
+          "url": "https://www.instagram.com/p/Dejl5ZrDbPc/"
+        }
+      ],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "C'est vanteur ! Et je le dis parce qu'on est en panier que personne n'enregistre. Et la France, la France des militaires, la France, vous sortirez de la cathédrale, et vous verrez ses prénoms et ses noms. Vous verrez ces dames à créer de présomers de noms, d'hommes, de femmes,",
+            "evidence_span_masked": "l’idéologie raciste et violente de l’extrême-droite qui s’y exprime",
+            "timestamp": null,
+            "rationale": "The caption explicitly denounces the racist ideology and calls for sanctions against the speaker, constituting counter-speech.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-09-14",
+            "url": "https://www.instagram.com/p/DdbFiKGq8XM/"
+          },
+          {
+            "excerpt": "je ne suis pas française. Mais si ! Mais si, mais c'est pour ça qu'elle le porte. Parce que les musulmanes, elles en avaient marre de dire à tous ceux qu'elles croisaient dans la rue comme ça, je ne suis pas française. Ben madame, moi je vais aller chercher mon pain.",
+            "evidence_span_masked": "Parce que les musulmanes, elles en avaient marre de dire à tous ceux qu'elles croisaient dans la rue comme ça, je ne suis pas française.",
+            "timestamp": "1:14",
+            "rationale": "The content uses satire and irony to mock and refute racist arguments about identity and immigration.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-09-28",
+            "url": "https://www.instagram.com/p/Dd1jJALqeN5/"
+          }
+        ],
+        "news_reporting": [
+          {
+            "excerpt": "Une critique qu'il précise par cette interpellation. Rire dans le parterre de militaires. L'aumônier semble aussi évoquer le grand remplacement, une théorie raciste d'extrême droite. Continuer à avoir cette grouette, cette grouette, si nous, on sera ridiculisé. Sinon, ce beau",
+            "evidence_span_masked": "L'aumônier semble aussi évoquer le grand remplacement, une théorie raciste d'extrême droite.",
+            "timestamp": "0:30",
+            "rationale": "The video is a news report from franceinfo that neutrally reports on a controversy involving a priest's speech, explicitly identifying the 'great replacement' theory as racist without endorsing it.",
+            "views_band": "100k–1M",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-09-14",
+            "url": "https://www.instagram.com/p/DdbynVvFRBy/"
+          },
+          {
+            "excerpt": "ce sont des militaires du régiment de parachutistes d'infanterie de marine de Carcassonne. Le discours évoque aussi la thèse d'extrême droite du grand remplacement. En fait, au bout d'un moment, quand on a soi, quand on a point, c'est la loi qui régnera et d'autres prendront",
+            "evidence_span_masked": "Le discours évoque aussi la thèse d'extrême droite du grand remplacement.",
+            "timestamp": "0:30",
+            "rationale": "The content is a news report detailing a controversy involving racist and extremist remarks, citing reactions from officials and politicians without adopting the hateful stance itself.",
+            "views_band": "100k–1M",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-09-14",
+            "url": "https://www.tiktok.com/@leparisien/video/7687286703911914784"
+          }
+        ]
+      }
+    },
+    {
+      "narrative_id": "N01_crime_immigration",
+      "name": "Immigration blamed for crime",
+      "name_fr": "L'immigration accusée d'être la cause de la délinquance",
+      "description_en": "Immigrants or people of foreign origin are presented as the cause of crime and insecurity.",
+      "description_fr": "Les immigrés ou les personnes d'origine étrangère sont présentés comme la cause de la délinquance et de l'insécurité.",
+      "totals": {
+        "racist": 6,
+        "counter_speech": 24,
+        "news_reporting": 12
+      },
+      "n_review": 13,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 1,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 18300
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 1,
+          "counter_speech": 4,
+          "news_reporting": 0,
+          "views": 6699
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 2,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 3,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 2,
+          "views": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 2,
+          "counter_speech": 10,
+          "news_reporting": 1,
+          "views": 271258
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 1,
+      "last_count": 2,
+      "too_few": true,
+      "reach": 342763,
+      "amplification": 0.14,
+      "amplified": false,
+      "off_caption": {
+        "share": 1.0,
+        "n": 3,
+        "video": 3
+      },
+      "examples": [
+        {
+          "excerpt": "des immigrés et de leurs enfants dans cette violence et ces crimes et cette délinquance. il faut renvoyer tous les criminels et les délinquants étrangers. D'abord les étrangers. Les étrangers qui font 25% des places de prison. Donc il y a à peu près 80 000 prisonniers, donc",
+          "evidence_span_masked": "il faut renvoyer tous les criminels et les délinquants étrangers",
+          "timestamp": "0:23",
+          "rationale": "Calls for the mass expulsion of a group defined by foreign origin based on criminal statistics.",
+          "views_band": "10k–100k",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "instagram",
+          "week": "2026-10-26",
+          "url": "https://www.instagram.com/p/De9ion6Om-K/"
+        },
+        {
+          "excerpt": "marche sur eux. Malheureusement, on a un souci vis-à-vis de l'immigration, parce que c'est une immigration coloniale qui a l'impression, sûrement à juste titre, que la France nous doit quelque chose. Vous avez baisé nos parents, on vient baiser la France. Clairement,",
+          "evidence_span_masked": "c'est une immigration coloniale qui a l'impression, sûrement à juste titre, que la France nous doit quelque chose. Vous avez baisé nos parents, on vient baiser la France.",
+          "timestamp": "0:39",
+          "rationale": "The speaker generalizes negatively about immigrants, attributing a collective hostile and sexualized motive to them based on their origin, which constitutes racist hate speech.",
+          "views_band": "10k–100k",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "tiktok",
+          "week": "2026-08-24",
+          "url": "https://www.tiktok.com/@thearchitect.mmm/video/7679015526324079905"
+        },
+        {
+          "excerpt": "Mes chers compatriotes, de nombreuses villes de France s'apprêtent une nouvelle fois à être mises à feu et à sang. Il n'y a aucun effet de surprise, tout est prévu, planifié et inscrit à l'agenda, celui des pouvoirs publics comme celui des racailles. Tout est organisé, préparé",
+          "evidence_span_masked": "",
+          "timestamp": null,
+          "rationale": "The content promotes a racist narrative by generalizing negative stereotypes about immigrants, linking them to crime and social disorder, and advocating for exclusionary policies based on origin.",
+          "views_band": "100k–1M",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "instagram",
+          "week": "2026-10-19",
+          "url": "https://www.instagram.com/p/De36wu3Oj5e/"
+        }
+      ],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "que ce pays n'a pas un problème avec ce qu'on fait, il a un problème avec ce qu'on est. C'est ça le racisme, ce n'est pas un individu isolé ou l'extrême droite. Le racisme, c'est une organisation du monde qui dit, eux-là, leur vie, elle compte beaucoup moins que les autres.",
+            "evidence_span_masked": "C'est ça le racisme, ce n'est pas un individu isolé ou l'extrême droite. Le racisme, c'est une organisation du monde qui dit, eux-là, leur vie, elle compte beaucoup moins que les autres.",
+            "timestamp": "0:33",
+            "rationale": "The content explicitly defines and denounces systemic racism and structural violence against B*** and North African communities, positioning itself as an anti-racist critique of the status quo.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-10-19",
+            "url": "https://www.instagram.com/p/De3nLsiOljA/"
+          },
+          {
+            "excerpt": "t'expliquer que le racisme c'est mal t'sais. Mais hé, fermez vos grandes bails en fait, c'est vous qui avez fait ça là, à passer vos journées, à essayer de faire flipper les gens avec l'immigration, l'insécurité, l'ensauvagement de la jeunesse, à faire passer les",
+            "evidence_span_masked": "c'est vous qui avez fait ça là, à passer vos journées, à essayer de faire flipper les gens avec l'immigration",
+            "timestamp": "0:12",
+            "rationale": "The content strongly condemns the racist attack and criticizes media and political figures for promoting racist narratives and dehumanization.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-10-19",
+            "url": "https://www.instagram.com/p/De2gLUVoZQQ/"
+          }
+        ],
+        "news_reporting": [
+          {
+            "excerpt": "à conseiller régional, député européen et enfin président du Rassemblement national. Une ascension fulgurante qui repose en partie sur une histoire enjolivée par le parti d'extrême droite.",
+            "evidence_span_masked": "Une ascension fulgurante qui repose en partie sur une histoire enjolivée par le parti d'extrême droite.",
+            "timestamp": "2:44",
+            "rationale": "The video is a journalistic investigation reporting on the political career and narrative construction of Jordan Bardella, including the citation of his past slogans for context, without promoting racist views itself.",
+            "views_band": "100k–1M",
+            "label": "news_reporting",
+            "confidence": 0.9,
+            "platform": "tiktok",
+            "week": "2026-09-28",
+            "url": "https://www.tiktok.com/@ina.fr/video/7691271965763570977"
+          },
+          {
+            "excerpt": "Le voile est imposé, ce signe horrible de soumission de la femme à l'homme. Les vrais féministes, eh bien c'est nous. C'est une mesure qui est totalement anti-féministe. Les personnes qui veulent interdire le voile prétendent vouloir interdire un vêtement à des femmes pour les",
+            "evidence_span_masked": "Le port du voile à l’école continue de diviser la Suisse.",
+            "timestamp": "0:00",
+            "rationale": "The content is a news report presenting multiple political perspectives on the school veil ban debate in Switzerland, including arguments for and against, without the platform itself promoting hate or racism.",
+            "views_band": "10k–100k",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-10-12",
+            "url": "https://www.instagram.com/p/DeZhyDpsveq/"
+          }
+        ]
+      }
+    },
+    {
+      "narrative_id": "N10_not_really_french",
+      "name": "'Not really French': origin and skin colour",
+      "name_fr": "« Pas vraiment français » : origine et couleur de peau",
+      "description_en": "Black and brown French people told they are not really French because of their origin or skin colour, and should go back to 'their' country; includes colourism (lighter skin valued over darker skin).",
+      "description_fr": "Des Français noirs ou métis se voient dire qu'ils ne sont pas vraiment français à cause de leur origine ou de leur couleur de peau, et qu'ils devraient « rentrer chez eux » ; inclut le colorisme (valorisation des peaux claires).",
+      "totals": {
+        "racist": 5,
+        "counter_speech": 90,
+        "news_reporting": 31
+      },
+      "n_review": 5,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 5,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 4,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 3,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 8,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 7,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 1,
+          "counter_speech": 11,
+          "news_reporting": 1,
+          "views": 5870
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 1,
+          "counter_speech": 8,
+          "news_reporting": 3,
+          "views": 7424
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 7,
+          "news_reporting": 6,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 10,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 2,
+          "counter_speech": 14,
+          "news_reporting": 2,
+          "views": 47832
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 1,
+          "counter_speech": 12,
+          "news_reporting": 5,
+          "views": 268100
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 2,
+      "last_count": 3,
+      "too_few": true,
+      "reach": 329226,
+      "amplification": 0.72,
+      "amplified": false,
+      "off_caption": {
+        "share": 1.0,
+        "n": 4,
+        "video": 4
+      },
+      "examples": [
+        {
+          "excerpt": "qui va négocier? Si j'envoie un négocier, je te casse la gueule. Si t'es pas content, elle retourne chez vous, dans ton pays, chaud avec les chameaux. Y a plus de 900 modèles différents dans le magasin. De petits à grands, de petits, de grands, de grands, de grands, de",
+          "evidence_span_masked": "elle retourne chez vous, dans ton pays, chaud avec les chameaux",
+          "timestamp": "0:34",
+          "rationale": "The speaker uses a derogatory stereotype about a specific group's origin (chameaux) to tell them to go back to their country, which constitutes a racist exclusionary remark.",
+          "views_band": "10k–100k",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "tiktok",
+          "week": "2026-10-12",
+          "url": "https://www.tiktok.com/@cabana.sports/video/7696716031359945992"
+        },
+        {
+          "excerpt": "Le problème avec vous les Africains, c'est que vous n'aimez pas lire. Vous passez votre temps à écouter du n'importe quoi sur les réseaux sociaux, des bobards que vos influenceuses prétendent dire sur les réseaux sociaux. Alors qu'il faut d'abord lire. La lecture c'est très",
+          "evidence_span_masked": "Le problème avec vous les Africains, c'est que vous n'aimez pas lire.",
+          "timestamp": "0:00",
+          "rationale": "The speaker uses derogatory generalizations and insults (idiots, bêtes) to attack a group defined by origin, promoting a narrative of intellectual inferiority.",
+          "views_band": "1k–10k",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "tiktok",
+          "week": "2026-09-21",
+          "url": "https://www.tiktok.com/@mavula_shop/video/7689735056008416530"
+        },
+        {
+          "excerpt": "Côte d'Ivoire s'oppose aux pays voisins, allez-y bien fouiller. Ce n'est pas un Ivoirien. La majorité, c'est des Bukinabés, c'est des Maliens, c'est des Guiniens, c'est des Nigériens. Ce sont eux qui ont intérêt à ce que la Côte d'Ivoire puisse s'opposer aux pays voisins. Et",
+          "evidence_span_masked": "La majorité, c'est des Bukinabés, c'est des Maliens, c'est des Guiniens, c'est des Nigériens. Ce sont eux qui ont intérêt à ce que la Côte d'Ivoire puisse s'opposer aux pays voisins.",
+          "timestamp": "2:37",
+          "rationale": "The content promotes xenophobic and racist narratives by generalizing that political opposition to neighboring countries is driven by specific ethnic/national groups (Burkinabé, Malian, etc.) and delegitimizing them as 'not real Ivorians'.",
+          "views_band": "1k–10k",
+          "label": "racist",
+          "confidence": 0.95,
+          "platform": "tiktok",
+          "week": "2026-09-14",
+          "url": "https://www.tiktok.com/@le.capitaine.sylla/video/7686621028805643552"
+        }
+      ],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "anesthésie. Il y a des cas où ces femmes-là même ne peuvent pas accoucher par voie basse. Cette pratique est faite pour des raisons misogynes. En fait, dans certaines communautés, on considère que les femmes ne savent pas se contrôler, ne savent pas se maîtriser, qu'il faut",
+            "evidence_span_masked": "Cette pratique est faite pour des raisons misogynes",
+            "timestamp": "3:02",
+            "rationale": "The video is a personal testimony and advocacy campaign denouncing female genital mutilation as a harmful, misogynistic practice, which falls under counter-speech against gender-based violence and harmful cultural traditions.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-10-19",
+            "url": "https://www.tiktok.com/@brutafrique/video/7700729127153749270"
+          },
+          {
+            "excerpt": "Si tu voyais grand-mère, le retour des fachos, qui lèvent le bras en l'air, nostalgique de Dachaud. On a des livres d'histoire, des minutes de silence, mais on perd la mémoire, bien plus vite qu'on ne le pense. Si tu voyais grand-mère. Si tu voyais grand-mère, la peur des",
+            "evidence_span_masked": "le retour des fachos, qui lèvent le bras en l'air, nostalgique de Dachaud",
+            "timestamp": "0:00",
+            "rationale": "The song laments the rise of far-right extremism and hate, serving as a critique of racism and a call to remember history.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-10-26",
+            "url": "https://www.instagram.com/p/De9y2BIuDwZ/"
+          }
+        ],
+        "news_reporting": [
+          {
+            "excerpt": "vu, c'est une honte. Rapidement, des internautes se sont indignés d'une telle modification. Certains sont même allés jusqu'à recourir à des insultes sexistes et racistes, ce qui constitue dans la loi française un délit d'injure publique aggravée passible d'un an",
+            "evidence_span_masked": "Certains sont même allés jusqu'à recourir à des insultes sexistes et racistes, ce qui constitue dans la loi française un délit d'injure publique aggravée",
+            "timestamp": "1:05",
+            "rationale": "The video neutrally reports on a controversy regarding a modified national anthem, citing racist insults from the public as part of the news event without promoting them.",
+            "views_band": "100k–1M",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-10-26",
+            "url": "https://www.tiktok.com/@leparisien/video/7701024837950639393"
+          },
+          {
+            "excerpt": "change au Québec à partir de septembre 2026. Premier changement. À partir du 1er septembre, toute pratique religieuse, donc individuelle ou collective, comme une prière par exemple, sera interdite dans les bâtiments et sur les terrains des organismes publics, notamment dans les",
+            "evidence_span_masked": "toute pratique religieuse, donc individuelle ou collective, comme une prière par exemple, sera interdite dans les bâtiments et sur les terrains des organismes publics",
+            "timestamp": "0:08",
+            "rationale": "The video neutrally reports on new government regulations regarding religious practices and face coverings in public institutions, without expressing a racist stance or promoting hate.",
+            "views_band": "100k–1M",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-08-31",
+            "url": "https://www.instagram.com/p/DctPxVwRQzz/"
+          }
+        ]
+      }
+    },
+    {
+      "narrative_id": "N03_welfare",
+      "name": "Immigrants as welfare abusers",
+      "name_fr": "Les immigrés accusés d'abuser des aides sociales",
+      "description_en": "Immigrants are portrayed as coming to France to live off benefits paid by 'real' French people.",
+      "description_fr": "Les immigrés sont décrits comme venant en France pour vivre d'aides payées par les « vrais » Français.",
+      "totals": {
+        "racist": 0,
+        "counter_speech": 4,
+        "news_reporting": 1
+      },
+      "n_review": 1,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 3,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 0,
+      "last_count": 0,
+      "too_few": true,
+      "reach": 0,
+      "amplification": null,
+      "amplified": false,
+      "off_caption": {
+        "share": null,
+        "n": 0,
+        "video": 0
+      },
+      "examples": [],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "Bon le vide c'est Bouygne hein ! J'espère que c'est pas un gamin ou quelqu'un qui a la percuté par contre. Oh c'est peut-être un migrant ! Un petit kirigou. Et puis t'as trois bicodes ou un habillé en... Qui viennent de toucher 1000 balles à la caf. Voilà, tranquillou. Ouais",
+            "evidence_span_masked": "vous faites face à 30 secondes d’un condensé de racisme",
+            "timestamp": null,
+            "rationale": "The video is a political party's denunciation of a police officer's racist remarks, aiming to condemn the behavior and promote anti-racism.",
+            "views_band": "10k–100k",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-09-07",
+            "url": "https://www.instagram.com/p/DdEqAAioRFx/"
+          },
+          {
+            "excerpt": "Et alors ? On a niqué les bouignols, on a niqué les bouignols. Là, ce qui est bien, c'est qu'au moins, au mois de décembre, la zone, elle sera claire. Avec les forains, tu vois, les pencachiens et les bouignols, ils n'aiment pas ça, ils règlent ça en creux. J'espère que ce n'est",
+            "evidence_span_masked": "Encore des policiers pris en flagrant délit de propos racistes. Encore des « cas isolés » qui commencent sérieusement à manquer d’isolement.",
+            "timestamp": null,
+            "rationale": "The caption explicitly denounces and criticizes the racist behavior of police officers, framing it as a systemic issue rather than isolated incidents.",
+            "views_band": "10k–100k",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-09-07",
+            "url": "https://www.instagram.com/p/DdEr7DQsZyD/"
+          }
+        ],
+        "news_reporting": [
+          {
+            "excerpt": "On est devenu chrétien sous Clovis. Bientôt on va devenir musulman sous Macron. On revit ces bouillons. Là ça filme ? Ah oui c'est génial. Non mais elles sont bien. Et là tu démarres ici. Ok vas-y arrume-toi à fronte. Et vas-y retourne. Et l'intérêt de filmer ça fait quoi ? T'as",
+            "evidence_span_masked": "",
+            "timestamp": null,
+            "rationale": "The content is a news report citing racist statements made by a police chief to inform the public about the incident and the lack of sanctions.",
+            "views_band": "100k–1M",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-09-07",
+            "url": "https://www.instagram.com/p/DdD2xuPqKIY/"
+          }
+        ]
+      }
+    },
+    {
+      "narrative_id": "N04_halal_food",
+      "name": "Halal food as an imposition",
+      "name_fr": "Le halal vu comme une imposition",
+      "description_en": "Halal food in shops or school canteens framed as Muslims imposing their culture on France.",
+      "description_fr": "L'alimentation halal dans les commerces ou les cantines scolaires est présentée comme une manière d'imposer une culture aux Français.",
+      "totals": {
+        "racist": 0,
+        "counter_speech": 9,
+        "news_reporting": 3
+      },
+      "n_review": 1,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 2,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0,
+          "counter_speech": 4,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0,
+          "counter_speech": 2,
+          "news_reporting": 0,
+          "views": 0
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 0,
+      "last_count": 0,
+      "too_few": true,
+      "reach": 0,
+      "amplification": null,
+      "amplified": false,
+      "off_caption": {
+        "share": null,
+        "n": 0,
+        "video": 0
+      },
+      "examples": [],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "bien, on a une statue templière, très bien, mais le fait de faire du halal, c'est un choix. Le restaurant est ouvert à tout le monde, sauf aux racistes. Petit coup de gueule avec le sourire, on a eu beaucoup de commentaires suite à une vidéo qui mettait des viandes halales en",
+            "evidence_span_masked": "Le restaurant est ouvert à tout le monde, sauf aux racistes.",
+            "timestamp": "0:05",
+            "rationale": "The video explicitly defends the inclusion of halal meat and Muslim customers while condemning racist comments and exclusion.",
+            "views_band": "1M+",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-08-31",
+            "url": "https://www.tiktok.com/@lebeef_marais/video/7680615590297373984"
+          },
+          {
+            "excerpt": "certes. Je veux faire du halal parce que j'accepte tout le monde. Mais par contre, j'invite les racistes à ne pas venir. Personne ne le sait, mais dans le marais, tu as ce resto de viande qui propose une formule à volonté avec même des viandes halal. Parce que",
+            "evidence_span_masked": "j'invite les racistes à ne pas venir",
+            "timestamp": "0:06",
+            "rationale": "The content explicitly denounces racist and Islamophobic harassment against the restaurant owner and supports his inclusive stance.",
+            "views_band": "1M+",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-09-07",
+            "url": "https://www.instagram.com/p/DdLpj7MI5zk/"
+          }
+        ],
+        "news_reporting": []
+      }
+    },
+    {
+      "narrative_id": "N05_food_stereotypes",
+      "name": "Food and smell stereotypes",
+      "name_fr": "Stéréotypes sur la nourriture et les odeurs",
+      "description_en": "Mocking or disgust narratives about the food and smells of Asian, African or Arab communities.",
+      "description_fr": "Récits moqueurs ou dégoûtés sur la cuisine et les odeurs attribuées aux communautés asiatiques, africaines ou arabes.",
+      "totals": {
+        "racist": 0,
+        "counter_speech": 4,
+        "news_reporting": 0
+      },
+      "n_review": 0,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 3,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 0,
+      "last_count": 0,
+      "too_few": true,
+      "reach": 0,
+      "amplification": null,
+      "amplified": false,
+      "off_caption": {
+        "share": null,
+        "n": 0,
+        "video": 0
+      },
+      "examples": [],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "des obligeantes racistes. Sur l'apparence, sur les clichés que les immigrés peuvent avoir. J'ai vu le racisme vraiment à travers ma famille. Et c'est pour ça que je me bats un peu au jour le jour pour éviter tout ça. Je ne m'approprie pas ce combat. Mais je suis plutôt du",
+            "evidence_span_masked": "J'ai vu le racisme vraiment à travers ma famille. Et c'est pour ça que je me bats un peu au jour le jour pour éviter tout ça.",
+            "timestamp": "0:44",
+            "rationale": "The speaker shares personal experiences of racism faced by her family and explicitly states her intention to fight against it and raise awareness.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.9,
+            "platform": "instagram",
+            "week": "2026-08-31",
+            "url": "https://www.instagram.com/p/Dcy1NOnCIVF/"
+          }
+        ],
+        "news_reporting": []
+      }
+    },
+    {
+      "narrative_id": "N06_behaviour_savagery",
+      "name": "Uncivilised behaviour ('ensauvagement')",
+      "name_fr": "Comportements jugés « incivilisés » (« ensauvagement »)",
+      "description_en": "Young people of immigrant origin framed as violent, uncivilised or unable to respect rules.",
+      "description_fr": "Les jeunes issus de l'immigration sont présentés comme violents, incivilisés ou incapables de respecter les règles.",
+      "totals": {
+        "racist": 0,
+        "counter_speech": 11,
+        "news_reporting": 1
+      },
+      "n_review": 0,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0,
+          "counter_speech": 1,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 3,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0,
+          "counter_speech": 3,
+          "news_reporting": 0,
+          "views": 0
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 0,
+      "last_count": 0,
+      "too_few": true,
+      "reach": 0,
+      "amplification": null,
+      "amplified": false,
+      "off_caption": {
+        "share": null,
+        "n": 0,
+        "video": 0
+      },
+      "examples": [],
+      "context_examples": {
+        "counter_speech": [
+          {
+            "excerpt": "Sur ces news, ce qui les inquiète, c'est un ensauvagement d'une partie de la jeunesse. Et oui, parce que tout ça, c'est la faute des Noirs et des Arabes. Et là, je vois qu'il pleut, j'imagine que c'est aussi de la faute des Noirs et des Arabes. Cerise sur la grenade de",
+            "evidence_span_masked": "Et oui, parce que tout ça, c'est la faute des Noirs et des Arabes. Et là, je vois qu'il pleut, j'imagine que c'est aussi de la faute des Noirs et des Arabes.",
+            "timestamp": "1:25",
+            "rationale": "The video explicitly mocks and refutes racist narratives blaming ethnic groups for social unrest, using satire to condemn such prejudice.",
+            "views_band": "1M+",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "instagram",
+            "week": "2026-10-05",
+            "url": "https://www.instagram.com/p/DeMw_FiseAX/"
+          },
+          {
+            "excerpt": "Nous donnons la parole, monsieur le maire, à tous les élus et à tous les avis. Non, le racisme, ce n'est pas un avis, c'est un délit. Et quand l'Arcum vous met en d*** et vous épingle plusieurs fois sur le climat xénophobe et islamophobe que vous instaurez, mais que",
+            "evidence_span_masked": "le racisme, ce n'est pas un avis, c'est un délit",
+            "timestamp": "1:13",
+            "rationale": "The speaker denounces the racist attack and blames the far-right discourse for inciting violence, clearly positioning against racism.",
+            "views_band": "100k–1M",
+            "label": "counter_speech",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-10-19",
+            "url": "https://www.tiktok.com/@sallysurtiktok/video/7700719657954676000"
+          }
+        ],
+        "news_reporting": []
+      }
+    },
+    {
+      "narrative_id": "N09_anti_asian_disease",
+      "name": "Asians blamed for disease",
+      "name_fr": "Les personnes asiatiques accusées de propager des maladies",
+      "description_en": "People of Asian origin blamed for COVID-19 or treated as carriers of disease.",
+      "description_fr": "Les personnes d'origine asiatique sont tenues pour responsables du COVID-19 ou traitées comme porteuses de maladies.",
+      "totals": {
+        "racist": 0,
+        "counter_speech": 0,
+        "news_reporting": 1
+      },
+      "n_review": 0,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 1,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 0,
+      "last_count": 0,
+      "too_few": true,
+      "reach": 0,
+      "amplification": null,
+      "amplified": false,
+      "off_caption": {
+        "share": null,
+        "n": 0,
+        "video": 0
+      },
+      "examples": [],
+      "context_examples": {
+        "counter_speech": [],
+        "news_reporting": [
+          {
+            "excerpt": "dont je vous parle depuis le début, pour la plupart, ce sont des civils chinois. Il y a également des Russes, des Coréens, des M***. Certains d'entre eux sont des prisonniers politiques, d'autres des résistants. Et on sait que dans certains villages, les Japonais",
+            "evidence_span_masked": "Il y a également des Russes, des Coréens, des M***. Certains d'entre eux sont des prisonniers politiques, d'autres des résistants.",
+            "timestamp": "2:04",
+            "rationale": "The video is a historical documentary reporting on the Unit 731 war crimes, describing victims and events in an informative manner without promoting hate or racist narratives.",
+            "views_band": "10k–100k",
+            "label": "news_reporting",
+            "confidence": 0.95,
+            "platform": "tiktok",
+            "week": "2026-09-28",
+            "url": "https://www.tiktok.com/@spookycha2.1/video/7691031519338433814"
+          }
+        ]
+      }
+    },
+    {
+      "narrative_id": "other",
+      "name": "Other racist storylines",
+      "name_fr": "Autres récits racistes",
+      "description_en": "Racist videos that fit none of the listed storylines.",
+      "description_fr": "Vidéos racistes qui ne correspondent à aucun des récits listés.",
+      "totals": {
+        "racist": 2,
+        "counter_speech": 0,
+        "news_reporting": 0
+      },
+      "n_review": 10,
+      "weekly": [
+        {
+          "week": "2026-08-03",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-10",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-17",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-24",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 1,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 19835
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 1,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 17000
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0,
+          "counter_speech": 0,
+          "news_reporting": 0,
+          "views": 0
+        }
+      ],
+      "rising": false,
+      "change_pct": null,
+      "prev_count": 1,
+      "last_count": 1,
+      "too_few": true,
+      "reach": 36835,
+      "amplification": 0.47,
+      "amplified": false,
+      "off_caption": {
+        "share": 1.0,
+        "n": 1,
+        "video": 1
+      },
+      "examples": [],
+      "context_examples": {
+        "counter_speech": [],
+        "news_reporting": []
+      }
+    }
+  ],
+  "baseline": {
+    "label": "Recherche par mots-clés exacts / Exact keyword search",
+    "racist": 9,
+    "counter_speech": 52,
+    "news_reporting": 10,
+    "irrelevant": 11,
+    "total": 82,
+    "racist_sure": 7,
+    "racist_review": 2
+  },
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "size": 38,
+      "top_terms": [
+        "france",
+        "droite",
+        "pays",
+        "dire",
+        "faut"
+      ],
+      "main_narrative_id": "N01_crime_immigration",
+      "rising": true,
+      "weekly": [
+        {
+          "week": "2026-08-24",
+          "racist": 1
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 2
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 2
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 1
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 4
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 9
+        }
+      ]
+    },
+    {
+      "cluster_id": 1,
+      "size": 5,
+      "top_terms": [
+        "islam",
+        "enfant",
+        "coran",
+        "enfants",
+        "parents"
+      ],
+      "main_narrative_id": "N01_crime_immigration",
+      "rising": false,
+      "weekly": []
+    },
+    {
+      "cluster_id": 2,
+      "size": 5,
+      "top_terms": [
+        "lfi",
+        "gravelas",
+        "parodisiague",
+        "france",
+        "commenter"
+      ],
+      "main_narrative_id": "N02_replacement",
+      "rising": false,
+      "weekly": [
+        {
+          "week": "2026-08-24",
+          "racist": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 1
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 1
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0
+        }
+      ]
+    },
+    {
+      "cluster_id": 3,
+      "size": 5,
+      "top_terms": [
+        "afrique",
+        "dit",
+        "centrale",
+        "gars",
+        "venir"
+      ],
+      "main_narrative_id": "N10_not_really_french",
+      "rising": false,
+      "weekly": [
+        {
+          "week": "2026-08-24",
+          "racist": 0
+        },
+        {
+          "week": "2026-08-31",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-07",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-14",
+          "racist": 0
+        },
+        {
+          "week": "2026-09-21",
+          "racist": 1
+        },
+        {
+          "week": "2026-09-28",
+          "racist": 0
+        },
+        {
+          "week": "2026-10-05",
+          "racist": 0
+        },
+        {
+          "week": "2026-10-12",
+          "racist": 0
+        },
+        {
+          "week": "2026-10-19",
+          "racist": 0
+        }
+      ]
+    }
+  ],
+  "eval": {
+    "fpr": 0.08,
+    "precision": null,
+    "recall": null,
+    "note": "Preuve de concept, pas un verdict / Proof of concept, not a verdict. FPR : jeu de cas bénins annoté à la main (n=100) / FPR on hand-labelled benign look-alikes. Sources bénignes retenues : conan_fr, ftr_label0_identity ; écartées : mlma_fr (étiquettes « normal » bruitées, beaucoup contiennent une insulte ethnique) / benign sources used: conan_fr, ftr_label0_identity; left out: mlma_fr (noisy 'normal' labels, many contain an ethnic slur). Précision non disponible / precision unavailable.",
+    "n_benign": 100,
+    "n_precision": null,
+    "fpr_sure": 0.02,
+    "sure_threshold": 0.9
+  },
+  "brief": {
+    "date": "2026-11-07",
+    "period": {
+      "from": "2026-08-07",
+      "to": "2026-11-01"
+    },
+    "facts": [
+      {
+        "key": "reach",
+        "narrative_id": "N02_replacement",
+        "reach": 2153820,
+        "n": 8
+      },
+      {
+        "key": "clip",
+        "narrative_id": "N02_replacement",
+        "views": 798128,
+        "week": "2026-10-12"
+      },
+      {
+        "key": "pushback",
+        "narrative_id": "N10_not_really_french",
+        "c": 90,
+        "r": 5
+      },
+      {
+        "key": "spoken",
+        "narrative_id": null,
+        "k": 22,
+        "n": 24,
+        "views": 2160343
+      }
+    ],
+    "min_items": 10,
+    "rising": [],
+    "en": {
+      "title": "This week’s brief",
+      "date": "7 Nov 2026",
+      "subtitle": "Racist storylines on French TikTok and Instagram · videos published 7 Aug – 1 Nov 2026",
+      "findings": [
+        {
+          "key": "reach",
+          "stat": "2.2M",
+          "text": "views on ‘Demographic replacement conspiracy’, the racist storyline with the most reach (8 racist posts, AI sure)",
+          "narrative_id": "N02_replacement"
+        },
+        {
+          "key": "clip",
+          "stat": "798k",
+          "text": "views on the most-viewed racist clip, in ‘Demographic replacement conspiracy’ (week of 12 Oct)",
+          "narrative_id": "N02_replacement"
+        },
+        {
+          "key": "pushback",
+          "stat": "90 vs 5",
+          "text": "videos pushing back vs racist: the strongest pushback, on 'Not really French': origin and skin colour",
+          "narrative_id": "N10_not_really_french"
+        },
+        {
+          "key": "spoken",
+          "stat": "22 of 24",
+          "text": "racist posts say it only out loud or on screen: 2.2M views that caption search can’t see",
+          "narrative_id": null
+        }
+      ],
+      "rising": "Rising: no storyline yet. Too few videos to call a trend (the rule needs 10 across two 4-week windows).",
+      "footer": "AI labels, not yet checked by a person. Leads, not verdicts.",
+      "cta": "See the evidence",
+      "open": "Open the radar"
+    },
+    "fr": {
+      "title": "Le brief de la semaine",
+      "date": "7 nov. 2026",
+      "subtitle": "Récits racistes sur TikTok et Instagram en France · vidéos publiées du 7 août au 1er nov. 2026",
+      "findings": [
+        {
+          "key": "reach",
+          "stat": "2,2 M",
+          "text": "vues pour Théorie du complot du « remplacement » démographique, le récit raciste le plus vu (8 contenus racistes selon l’IA)",
+          "narrative_id": "N02_replacement"
+        },
+        {
+          "key": "clip",
+          "stat": "798 k",
+          "text": "vues pour le clip raciste le plus vu, dans Théorie du complot du « remplacement » démographique (semaine du 12 oct.)",
+          "narrative_id": "N02_replacement"
+        },
+        {
+          "key": "pushback",
+          "stat": "90 contre 5",
+          "text": "vidéos contre le racisme face aux vidéos racistes : la plus forte riposte, sur « Pas vraiment français » : origine et couleur de peau",
+          "narrative_id": "N10_not_really_french"
+        },
+        {
+          "key": "spoken",
+          "stat": "22 sur 24",
+          "text": "contenus racistes ne le disent qu’à l’oral ou à l’écran : 2,2 M vues invisibles pour la recherche par légende",
+          "narrative_id": null
+        }
+      ],
+      "rising": "En hausse : aucun récit pour l’instant. Trop peu de vidéos pour parler de tendance (il en faut 10 sur deux périodes de quatre semaines).",
+      "footer": "Étiquettes de l’IA, pas encore vérifiées par une personne. Des pistes, pas des verdicts.",
+      "cta": "Voir les preuves",
+      "open": "Ouvrir le radar"
+    }
+  },
+  "links_until": "2026-11-07T19:00:00+01:00"
+}
