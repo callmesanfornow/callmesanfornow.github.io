@@ -12,7 +12,7 @@ site_theme               : "mint" # The available themes options are "default", 
 title                    : "Aditya Narayan SANKARAN"
 title_separator          : "-"
 name                     : &name "Aditya Narayan SANKARAN"
-description              : &description "Aditya's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
+description              : &description "Aditya Narayan Sankaran: multilingual speech and language AI, Trust & Safety and Responsible AI"   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://callmesanfornow.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -26,7 +26,7 @@ author:
   avatar           : "D1090233-004C-463D-BFF5-D8F8278244EC_1_105_c.jpeg"
   name             : "Aditya Narayan SANKARAN"
   pronouns         : "he/him/his"  
-  bio              : "PhD student in Computer Science"
+  bio              : "PhD researcher · Multilingual speech & NLP · Trust & Safety · Responsible AI"
   location         : "Paris, FR"
   employer         : "Télécom SudParis"
   uri              : # URL
